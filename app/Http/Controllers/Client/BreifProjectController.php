@@ -15,7 +15,8 @@ class BreifProjectController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('add-breif')) abort(403);
-        $invoice = Invoices::where('email', Auth::user()->email)->get();
+        $invoice = Invoices::where('client_id', Auth::user()->id)->get();
+        dd($invoice);
         return view('admin.breif.create', compact('invoice'));
     }
 
@@ -24,7 +25,8 @@ class BreifProjectController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('add-breif')) abort(403);
-        $invoice = Invoices::where('email', Auth::user()->email)->get();
+        $invoice = Invoices::where('client_id', Auth::user()->id)->first();
+        dd($invoice);
         return view('admin.breif.create', compact('invoice'));
     }
 

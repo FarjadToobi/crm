@@ -60,10 +60,9 @@
                                 @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
                                     <td>                                        
                                         @permission('project-assign')
-                                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                                data-target="#assign_{{ $breif->id }}">
+                                            <a href="{{ url("create/$breif->invoice_id")}}" class="btn btn-info">
                                                 <i class="fa fa-user"></i> Assign
-                                            </button>
+                                            </a>
                                         @endpermission                                        
                                         @permission('edit-logobreif')
                                             <a href="{{ route('logobreif.edit', $breif->id) }}" class="btn btn-primary"><i
@@ -76,33 +75,7 @@
                                     </td>
                                 @endif
                             </tr>
-                            @permission('project-assign')
-                            <!-- Modal -->
-                            <div class="modal fade top-30" id="assign_{{ $breif->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="assign_{{ $breif->id }}Label" aria-hidden="true">
-                                <form action="{{ route("project.store") }}" method="post">
-                                    @csrf
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Project: {{ $breif->logo_name }}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="client" value="{{$breif->user_id}}" />
-                                                <x-select name="assignto" label="Assign To" :collection="$users"  />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Assign</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        @endpermission
+                            
                         @endforeach
                     </tbody>
                 </table>

@@ -37,13 +37,9 @@ class SubtaskController extends Controller
             'roles', function($q){
                 $q->where('name', 'employee');
             }
-        )->orWhereHas(
-            'category_users', function($q){
-                $q->where('category_id', $task->category_id);
-            }
         )->get();
-        dd($users);
-        return view('admin.subtask.create', compact('id'));
+        
+        return view('admin.subtask.create', compact('id', 'users'));
     }
 
     /**
@@ -89,6 +85,14 @@ class SubtaskController extends Controller
     public function edit($id)
     {
         //
+        if (!Auth::user()->hasPermission('edit-subtask')) abort(403);
+        $subtask = SubTask::find($id);
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'employee');
+            }
+        )->get();
+        return view('admin.subtask.edit', compact('users', 'subtask'));
     }
 
     /**
@@ -101,6 +105,18 @@ class SubtaskController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try{
+            $subtask = SubTask::find($id);
+            $subtask->description = $request->description;
+            $subtask->user_id = $request->user;
+            $subtask->duedate = $request->due_date;
+            
+            $subtask->save();
+            
+            return back()->with('success', "Update successfully");
+        } catch (\Exception $e) {
+            return back()->with('error', json_encode($e->getMessage()));
+        }
     }
 
     /**
@@ -112,5 +128,12 @@ class SubtaskController extends Controller
     public function destroy($id)
     {
         //
+        if (!Auth::user()->hasPermission('delete-subtask')) abort(403);
+        try {
+            SubTask::destroy($id);
+            return back()->with('success', "Delete successfully");
+        } catch (\Exception $e) {
+            return back()->with('error', json_encode($e->getMessage()));
+        }
     }
 }

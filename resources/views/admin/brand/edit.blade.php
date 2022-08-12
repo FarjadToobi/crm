@@ -45,7 +45,30 @@
                     <x-select name="status" label="Status" :collection="$status" :selected="$brand->status"  />
                 </div>
 
-                
+
+                     
+                <div class="col-md-12 mb-4">
+                    <span class="block text-gray-700 mt-4">Assign To</span>
+                    <div class="form-check">
+                        
+                        @foreach ($users as $user)
+                            <input type="checkbox" class="form-check-input" name="user[]" value="{{ $user->id }}"
+                                id="user_{{ $user->id }}"  
+                                @if (count($brand->users->pluck('id')) > 0))
+                                    @foreach ($brand->users->pluck('id') as $checkuser)
+                                    {{ $checkuser == $user->id ? 'checked' : '' }}
+                                    @endforeach
+                                @endif    
+                                >
+                            <label class="form-check-label mr-5" for="user_{{ $user->id }}">
+                                <span class="ml-2">
+                                    {{ $user->name }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
                 <input type="hidden" name="previous_logo" value="{{ $brand->logo}}" />
                 <div class="form-group col-md-2">
                     <img src="{{ url('image/'.$brand->logo) }}" class="img-thumbnail" alt="{{$brand->name}}"/>

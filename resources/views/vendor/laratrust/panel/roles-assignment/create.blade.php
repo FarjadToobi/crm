@@ -34,8 +34,20 @@
                     {{-- <div class="col-md-6">
                 <x-select name="role" label="Role" :collection="$roles"  />
               </div> --}}
-                    <div class="col-md-6">
-                        <x-select name="category" label="Category" :collection="$categories" />
+
+                    <div class="col-md-12">
+                        <span class="block text-gray-700 mt-4">Categories</span>
+                        <div class="form-check">
+                            @foreach ($categories as $category)
+                                <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->id }}"
+                                    id="category_{{ $category->id }}">
+                                <label class="form-check-label mr-5" for="category_{{ $category->id }}">
+                                    <span class="ml-2">
+                                        {{ $category->name }}
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="col-md-12 mb-4">
                         <span class="block text-gray-700 mt-4">Roles</span>

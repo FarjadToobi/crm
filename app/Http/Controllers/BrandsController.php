@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brands;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use File;
@@ -19,7 +20,7 @@ class BrandsController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('general-access')) abort(403);
-        $brands = Brands::all();
+        $brands = Brands::all();        
         return view('admin.brand.index', compact('brands'));
     }
 
@@ -33,7 +34,12 @@ class BrandsController extends Controller
         //
         if (!Auth::user()->hasPermission('general-access')) abort(403);
         $status = Status::select('id', 'name')->get();
-        return view('admin.brand.create', compact('status'));
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'production');
+            }
+        )->get();
+        return view('admin.brand.create', compact('status', 'users'));
     }
 
     /**
@@ -75,6 +81,8 @@ class BrandsController extends Controller
                 $brand->logo = $filename;
             }
             $brand->save();
+            $brand->users()->sync($request->user);
+            
             return back()->with('success', "Insert successfully");
         } catch (\Exception $e) {
             return back()->with('error', json_encode($e->getMessage()));
@@ -93,7 +101,12 @@ class BrandsController extends Controller
         if (!Auth::user()->hasPermission('general-access')) abort(403);
         $brand = Brands::find($id);
         $status = Status::select('id', 'name')->get();
-        return view('admin.brand.view', compact('brand', 'status'));
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'production');
+            }
+        )->get();
+        return view('admin.brand.view', compact('brand', 'status', 'users'));
     }
 
     /**
@@ -108,7 +121,12 @@ class BrandsController extends Controller
         if (!Auth::user()->hasPermission('general-access')) abort(403);
         $brand = Brands::find($id);
         $status = Status::select('id', 'name')->get();
-        return view('admin.brand.edit', compact('brand', 'status'));
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'production');
+            }
+        )->get();
+        return view('admin.brand.edit', compact('brand', 'status', 'users'));
     }
 
     /**
@@ -154,7 +172,10 @@ class BrandsController extends Controller
                     File::delete($image_path);
                 }
             }
-            $brand->save();
+            
+            $brand->save();            
+            $brand->users()->sync($request->user);
+
             return back()->with('success', "Updated successfully");
         } catch (\Exception $e) {
             return back()->with('error', json_encode($e->getMessage()));

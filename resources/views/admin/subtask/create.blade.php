@@ -16,9 +16,9 @@
                 @csrf
                 <div class="form-row">
 
-                    {{-- <div class="col-md-6"> --}}
-                        {{-- <x-select name="task" label="Task" :collection="$task" />
-                    </div> --}}
+                    <div class="col-md-6">
+                        <x-select name="user" label="Assign To" :collection="$users" />
+                    </div>
                     <input type="hidden" name="task" value="{{$id}}">
                     <div class="col-md-6">
                         <x-input name="due_date" label="Due Date" type="date" value="{{ old('due_date') }}" />

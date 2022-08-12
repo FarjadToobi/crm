@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                                             </div>
                                         </div>
                                         </div>

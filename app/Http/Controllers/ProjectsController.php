@@ -28,12 +28,13 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     $client = Clients::where('status', 1)->whereIn('brand_id', Auth()->user()->brand_list())->get();
-    //     $category = Category::where('status', 1)->get();
-    //     return view('admin.project.create', compact('client', 'category'));
-    // }
+    public function create($id)
+    {
+        // $client = Clients::where('status', 1)->whereIn('brand_id', Auth()->user()->brand_list())->get();
+        $invoice = Invoices::find($id);
+        $category = Category::where('status', 1)->get();
+        return view('admin.project.create', compact('client', 'category'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,13 +56,7 @@ class ProjectsController extends Controller
         $request->request->add(['client_id' => $request->input('client')]);
         $request->request->add(['user_id' => auth()->user()->id]);
         $product = Projects::create($request->all());
-        $category = $request->input('category');
-        for ($i = 0; $i < count($category); $i++) {
-            $project_category = new ProjectCategory();
-            $project_category->project_id = $product->id;
-            $project_category->category_id = $category[$i];
-            $project_category->save();
-        }
+        
         return redirect()->back()->with('success', 'Project created Successfully.');
     }
 

@@ -40,9 +40,7 @@ class RolesAssignmentController
         return View::make('laratrust::panel.roles-assignment.index', [
             'models' => $modelsKeys,
             'modelKey' => $modelKey,
-            'users' => $userModel::query()
-                ->withCount(['roles', 'permissions'])
-                ->simplePaginate(10),
+            'users' => $userModel::all(),
         ]);
     }
 
@@ -69,7 +67,7 @@ class RolesAssignmentController
             'email' => 'required|email',
             'password' => 'required',
             'roles' => 'required',
-            'category' => 'required',
+            // 'category' => 'required',
         ]);
 
         $user = User::create([
@@ -77,24 +75,8 @@ class RolesAssignmentController
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        UserCategory::create([
-            'user_id' => $user->id,
-            'category_id' => $request->category,
-        ]);
-        // UserRole::create([
-        //     'role_id' => $request->role,
-        //     'user_id' => $user->id,
-        // ]);
-        // foreach ($request->permissions as $permission){
-        //     $this->permissionModel::create([
-        //         'permission_id' => $permission,
-        //         'user_id' => $user->id,
-        //     ]);
-        // }
+        $user->category()->sync($request->category);
         $user->syncRoles($request->get('roles') ?? []);
-        // if ($this->assignPermissions) {
-        //     $user->syncPermissions($request->get('permissions') ?? []);
-        // }
         $modelKey = $user->getKey();
         Session::flash('laratrust-success', 'Roles and permissions assigned successfully');
         return redirect(route('laratrust.roles-assignment.index'));
@@ -123,19 +105,7 @@ class RolesAssignmentController
 
                 return $role;
             });
-        // if ($this->assignPermissions) {
-        //     $permissions = $this->permissionModel::orderBy('name')
-        //         ->get(['id', 'name', 'display_name'])
-        //         ->map(function ($permission) use ($user) {
-        //             $permission->assigned = $user->permissions
-        //                 ->pluck('id')
-        //                 ->contains($permission->id);
-
-        //             return $permission;
-        //         });
-        // }
-
-
+            
         return View::make('laratrust::panel.roles-assignment.edit', [
             'modelKey' => $modelKey,
             'roles' => $roles,
@@ -157,28 +127,14 @@ class RolesAssignmentController
         }
 
         $user = $userModel::findOrFail($modelId);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
         $user->syncRoles($request->get('roles') ?? []);
+        $user->category()->sync($request->category);
 
-        $usercategory = UserCategory::where('user_id', '=', $modelId)->get();
-        if (count($usercategory) > 0) {
-            UserCategory::where('user_id', '=', $modelId)
-                ->update([
-                    'category_id' => $request->category
-                ]);
-            // $usercategory->category_id = $request->category;
-            // $usercategory->save();
-        } else {
-            UserCategory::create([
-                'user_id' => $modelId,
-                'category_id' => $request->category,
-            ]);
-        }
-
-        // $usercategory->save();
-        // if ($this->assignPermissions) {
-        //     $user->syncPermissions($request->get('permissions') ?? []);
-        // }
-
+        // $usercategory = UserCategory::where('user_id', '=', $modelId)->get();
+        
         Session::flash('laratrust-success', 'Roles and permissions assigned successfully');
         return redirect(route('laratrust.roles-assignment.index', ['model' => $modelKey]));
     }

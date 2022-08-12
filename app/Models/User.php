@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function brands(){
-        return $this->belongsToMany(Brands::class, 'brand_users');
+        return $this->belongsToMany(Brands::class, 'brand_users', 'user_id', 'brand_id');
     }
 
     public function brand_list(){

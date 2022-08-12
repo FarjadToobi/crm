@@ -12,4 +12,8 @@ class Brands extends Model
     {
         return $this->hasOne(Status::class, 'id', 'status');
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'brand_users', 'brand_id');
+    }
 }

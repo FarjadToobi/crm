@@ -43,6 +43,22 @@
                 <div class="col-md-4">
                     <x-select name="status" label="Status" :collection="$status"  />
                 </div>
+
+                <div class="col-md-12 mb-4">
+                    <span class="block text-gray-700 mt-4">Assign to</span>
+                    <div class="form-check">
+                        @foreach ($users as $user)
+                            <input type="checkbox" class="form-check-input" name="user[]" value="{{ $user->id }}"
+                                id="user_{{ $user->id }}">
+                            <label class="form-check-label mr-5" for="user_{{ $user->id }}">
+                                <span class="ml-2">
+                                    {{ $user->name }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+           
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

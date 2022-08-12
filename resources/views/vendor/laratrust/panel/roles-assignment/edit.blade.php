@@ -28,14 +28,27 @@
                         <x-select name="role" label="Role" :collection="$roles" />
                     </div> --}}
 
-                    <div class="col-md-6">
-                        @if (count($user->category->pluck('id')) > 0)
-                            @foreach ($user->category->pluck('id') as $category)
-                                <x-select name="category" label="Category" :collection="$categories" :selected="$category" />
+                    
+                    <div class="col-md-12">
+                        <span class="block text-gray-700 mt-4">Categories</span>
+                        <div class="form-check">
+                            
+                            @foreach ($categories as $key => $category)
+                                <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->id }}"
+                                    id="category_{{ $category->id }}"  
+                                    @if (count($user->category->pluck('id')) > 0))
+                                        @foreach ($user->category->pluck('id') as $checkcategory)
+                                        {{ $checkcategory == $category->id ? 'checked' : '' }}
+                                        @endforeach
+                                    @endif    
+                                    >
+                                <label class="form-check-label mr-5" for="category_{{ $category->id }}">
+                                    <span class="ml-2">
+                                        {{ $category->name }}
+                                    </span>
+                                </label>
                             @endforeach
-                        @else
-                            <x-select name="category" label="Category" :collection="$categories" />
-                        @endif
+                        </div>
                     </div>
 
                     <div class="col-md-12 mb-4">
