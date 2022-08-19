@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2022 at 11:24 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.15
+-- Generation Time: Aug 19, 2022 at 10:23 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,9 +49,10 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `url`, `status`, `created_at`, `updated_at`, `logo`, `auth_key`, `phone`, `phone_tel`, `email`, `address`, `address_link`, `sign`) VALUES
-(1, 'Design Gene Pro', 'https://www.designgene.com/', 1, '2022-07-15 13:44:28', '2022-07-25 10:28:58', '202207251528beni6.png', NULL, '09900900', '098908', 'design@gmail.com', 'nndkk dkskd alsk', 'https://www.kfcpakistan.com/', NULL),
+(1, 'Design Gene Pro', 'https://www.designgene.com/', 1, '2022-07-15 13:44:28', '2022-08-12 13:54:27', '202207251528beni6.png', NULL, '09900900', '098908', 'design@gmail.com', 'nndkk dkskd alsk', 'https://www.kfcpakistan.com/', NULL),
 (2, 'Design Cotton', 'https://laravel.com/', 1, '2022-07-18 13:28:09', '2022-07-18 13:28:09', '202207181828beni1.png', NULL, '990009', '39949999', 'design@cotton.com', 'A-20023 sec 5-3 sdk', 'https://laravel.com/', NULL),
-(3, 'The Web Planet', 'https://laravel.com/', 1, '2022-07-18 13:30:49', '2022-07-18 13:30:49', '202207181830port8.png', NULL, '09809890', '9080809', 'web@planet.com', 'A-2993 ske nkkka', 'https://laravel.com/', NULL);
+(3, 'The Web Planet', 'https://laravel.com/', 1, '2022-07-18 13:30:49', '2022-07-18 13:30:49', '202207181830port8.png', NULL, '09809890', '9080809', 'web@planet.com', 'A-2993 ske nkkka', 'https://laravel.com/', NULL),
+(6, 'VapeBazaar', 'https://www.vapebazaar.pk/', 1, '2022-08-12 13:32:55', '2022-08-12 13:32:55', '20220812183216587762526 (1).png', NULL, '03392288', '92001999299', 'info@vapebazaar.com', 'Vapebazaar.PK Is One Of The Largest Online Vape Shop In Pakistan Since 2016 , Having The Largest Variety Of Vapes , Eliquids And Vape Accessories.', 'https://www.vapebazaar.pk/', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,6 +66,16 @@ CREATE TABLE `brand_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `brand_users`
+--
+
+INSERT INTO `brand_users` (`user_id`, `brand_id`, `created_at`, `updated_at`) VALUES
+(17, 1, NULL, NULL),
+(17, 3, NULL, NULL),
+(17, 6, NULL, NULL),
+(17, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,7 +96,7 @@ CREATE TABLE `category_project` (
 
 INSERT INTO `category_project` (`project_id`, `category_id`, `created_at`, `updated_at`) VALUES
 (17, 4, '2022-08-08 13:20:58', '2022-08-08 13:20:58'),
-(16, 3, '2022-08-08 13:35:59', '2022-08-08 13:35:59');
+(22, 3, '2022-08-19 14:56:09', '2022-08-19 14:56:09');
 
 -- --------------------------------------------------------
 
@@ -105,11 +116,22 @@ CREATE TABLE `category_users` (
 --
 
 INSERT INTO `category_users` (`user_id`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 4, '2022-08-08 09:10:09', '2022-08-08 09:10:09'),
 (7, 3, '2022-08-08 05:14:13', '2022-08-08 05:14:13'),
 (8, 1, '2022-08-08 05:19:55', '2022-08-08 05:19:55'),
 (9, 1, '2022-08-08 05:21:27', '2022-08-08 05:21:27'),
-(10, 1, '2022-08-08 05:22:30', '2022-08-08 05:22:30');
+(10, 1, '2022-08-08 05:22:30', '2022-08-08 05:22:30'),
+(11, 5, '2022-08-11 13:49:49', '2022-08-11 13:49:49'),
+(12, 4, '2022-08-11 15:10:21', '2022-08-11 15:10:21'),
+(3, 5, NULL, NULL),
+(16, 6, NULL, NULL),
+(16, 7, NULL, NULL),
+(2, 6, NULL, NULL),
+(2, 7, NULL, NULL),
+(4, 1, NULL, NULL),
+(4, 4, NULL, NULL),
+(17, 8, NULL, NULL),
+(6, 3, NULL, NULL),
+(14, 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -194,8 +216,12 @@ CREATE TABLE `create_categories` (
 
 INSERT INTO `create_categories` (`id`, `name`, `service_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Logo', 3, 1, '2022-07-18 12:27:38', '2022-07-18 12:54:42'),
-(3, 'Web Desiging', 1, 2, '2022-07-18 12:54:53', '2022-07-29 01:40:38'),
-(4, 'Packaging', 3, 1, '2022-07-29 01:39:42', '2022-07-29 01:39:42');
+(3, 'Web Desiging', 1, 1, '2022-07-18 12:54:53', '2022-08-12 12:09:15'),
+(4, 'Packaging', 3, 1, '2022-07-29 01:39:42', '2022-07-29 01:39:42'),
+(5, 'Video Animation', NULL, 1, '2022-08-11 06:33:34', '2022-08-12 12:12:20'),
+(6, 'Ecommerce', NULL, 1, '2022-08-12 12:10:39', '2022-08-12 12:10:39'),
+(7, 'Web Development', NULL, 1, '2022-08-12 12:12:38', '2022-08-12 12:12:38'),
+(8, 'Other', NULL, 1, '2022-08-12 12:12:48', '2022-08-12 12:12:48');
 
 -- --------------------------------------------------------
 
@@ -217,7 +243,9 @@ CREATE TABLE `currencies` (
 --
 
 INSERT INTO `currencies` (`id`, `name`, `short_name`, `sign`, `created_at`, `updated_at`) VALUES
-(1, 'Dollar', 'USD', '$', '2022-07-15 13:43:39', '2022-07-15 13:43:39');
+(1, 'Dollar', 'USD', '$', '2022-07-15 13:43:39', '2022-07-15 13:43:39'),
+(2, 'Euro', 'Euro', '€', '2022-08-10 15:37:56', '2022-08-10 15:37:56'),
+(3, 'Canidian Dollar', 'Dollar', 'CA', '2022-08-10 15:37:56', '2022-08-10 15:37:56');
 
 -- --------------------------------------------------------
 
@@ -270,8 +298,8 @@ CREATE TABLE `invoices` (
 
 INSERT INTO `invoices` (`id`, `name`, `email`, `contact`, `brand`, `service`, `package`, `currency`, `client_id`, `invoice_number`, `invoice_date`, `sales_agent_id`, `description`, `amount`, `payment_status`, `payment_type`, `custom_package`, `transaction_id`, `created_at`, `updated_at`) VALUES
 (1, 'Test test', 'test@vomoto.com', '090909', 1, 1, 1, 1, 1, 4161010, '2022-07-15', 1, NULL, 2000, 1, 'one_time_payment', 'Test Package', NULL, '2022-07-15 13:48:26', '2022-07-22 13:26:40'),
-(2, 'Ronke', 'ronke@ronke.com', '009920290', 1, 3, 2, 1, 2, 7075247, '2022-07-22', 1, NULL, 2002, 0, 'one_time_payment', 'test', NULL, '2022-07-22 13:13:36', '2022-07-27 13:29:54'),
-(3, 'New', 'new@make.com', '098093804', 3, 4, 2, 1, 7, 8467264, '2022-07-25', 1, 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.', 2000, 0, 'one_time_payment', 'Pro Pack', NULL, '2022-07-25 11:53:40', '2022-07-27 13:27:12');
+(2, 'Ronke', 'ronke@ronke.com', '009920290', NULL, 3, 2, 1, 2, 7075247, '2022-07-22', 1, NULL, 2002, 1, 'one_time_payment', 'test', NULL, '2022-07-22 13:13:36', '2022-08-11 06:53:22'),
+(3, 'New', 'new@make.com', '098093804', NULL, 4, 2, 2, 7, 8467264, '2022-07-25', 1, 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.', 2000, 1, 'one_time_payment', 'Pro Pack', NULL, '2022-07-25 11:53:40', '2022-08-11 06:52:58');
 
 -- --------------------------------------------------------
 
@@ -294,6 +322,7 @@ CREATE TABLE `logo_forms` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
   `agent_id` bigint(20) UNSIGNED NOT NULL,
+  `brand_id` bigint(11) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -302,9 +331,9 @@ CREATE TABLE `logo_forms` (
 -- Dumping data for table `logo_forms`
 --
 
-INSERT INTO `logo_forms` (`id`, `logo_name`, `slogan`, `imagery`, `desired_design`, `colors_visual`, `intended_use`, `business_overview`, `target_audience`, `filesname`, `additional_information`, `user_id`, `invoice_id`, `agent_id`, `created_at`, `updated_at`) VALUES
-(1, 'KFC', 'Taste Delight', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', '16587762526.png', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 2, 1, 1, '2022-07-25 14:10:52', '2022-07-25 14:10:52'),
-(2, 'Nick', 'Quality Matters', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', '[\"165877710674.png\",\"165877710691.png\"]', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 2, 1, 1, '2022-07-25 14:25:06', '2022-07-25 14:25:06');
+INSERT INTO `logo_forms` (`id`, `logo_name`, `slogan`, `imagery`, `desired_design`, `colors_visual`, `intended_use`, `business_overview`, `target_audience`, `filesname`, `additional_information`, `user_id`, `invoice_id`, `agent_id`, `brand_id`, `created_at`, `updated_at`) VALUES
+(1, 'KFC', 'Taste Delight Forever', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', '[\"16587762526.png\"]', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 1, 1, 1, 1, '2022-07-25 14:10:52', '2022-08-11 11:20:10'),
+(2, 'Nick Shoes', 'Quality Matters', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', '[\"165877710674.png\",\"165877710691.png\"]', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 1, 1, 1, 1, '2022-07-25 14:25:06', '2022-08-11 11:20:37');
 
 -- --------------------------------------------------------
 
@@ -546,12 +575,21 @@ INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created
 (29, 'messages-access', 'Messages Access', 'Messages Access', '2022-08-09 06:22:31', '2022-08-09 06:22:31'),
 (30, 'reply-message', 'Reply Message', 'Reply Message', '2022-08-09 06:25:54', '2022-08-09 06:25:54'),
 (31, 'general-access', 'General Access', 'General Access', '2022-08-09 06:28:30', '2022-08-09 06:28:30'),
-(32, 'breif-access', 'Breif Access', 'Breif Access', '2022-08-09 06:29:40', '2022-08-09 06:29:40'),
-(33, 'show-breif', 'Show Breif', 'Show Breif', '2022-08-09 06:30:01', '2022-08-09 06:30:01'),
-(34, 'edit-breif', 'Edit Breif', 'Edit Breif', '2022-08-09 06:30:21', '2022-08-09 06:34:18'),
+(32, 'logobreif-access', 'LogoBreif Access', 'LogoBreif Access', '2022-08-09 06:29:40', '2022-08-11 07:24:45'),
+(33, 'show-logobreif', 'Show LogoBreif', 'Show LogoBreif', '2022-08-09 06:30:01', '2022-08-11 07:25:42'),
+(34, 'edit-logobreif', 'Edit LogoBreif', 'Edit LogoBreif', '2022-08-09 06:30:21', '2022-08-11 07:25:29'),
 (35, 'subtask-access', 'Subtask Access', 'Subtask Access', '2022-08-09 08:23:37', '2022-08-09 08:23:37'),
 (36, 'create-subtask', 'Create Subtask', 'Create Subtask', '2022-08-09 08:27:38', '2022-08-09 08:27:38'),
-(37, 'add-breif', 'Add Breif', 'Add Breif', '2022-08-09 08:29:06', '2022-08-09 08:29:06');
+(37, 'add-breif', 'Add Breif', 'Add Breif', '2022-08-09 08:29:06', '2022-08-11 07:25:13'),
+(39, 'create-task', 'Create Task', 'Create Task', '2022-08-10 11:35:12', '2022-08-10 11:35:12'),
+(40, 'webbreif-access', 'Webbreif Access', 'Webbreif Access', '2022-08-11 10:29:11', '2022-08-11 10:32:20'),
+(41, 'show-webbreif', 'Show Webbreif', 'Show Webbreif', '2022-08-11 10:29:42', '2022-08-11 10:29:42'),
+(42, 'edit-webbreif', 'Edit Webbreif', 'Edit Webbreif', '2022-08-11 10:30:06', '2022-08-11 10:30:06'),
+(43, 'project-assign', 'Project Assign', 'Project Assign', '2022-08-11 13:22:16', '2022-08-11 13:22:16'),
+(44, 'edit-subtask', 'Edit Subtask', 'Edit Subtask', '2022-08-11 15:47:49', '2022-08-11 15:47:49'),
+(45, 'delete-subtask', 'Delete Subtask', 'Delete Subtask', '2022-08-11 15:48:24', '2022-08-11 15:48:24'),
+(46, 'create-project', 'Create Project', 'Create Project', '2022-08-17 13:18:52', '2022-08-17 13:18:52'),
+(47, 'delete-project', 'Delete Project', 'Delete Project', '2022-08-18 10:27:04', '2022-08-18 10:27:04');
 
 -- --------------------------------------------------------
 
@@ -570,70 +608,94 @@ CREATE TABLE `permission_role` (
 
 INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (1, 1),
-(1, 2),
-(1, 4),
 (2, 1),
-(2, 2),
-(2, 4),
 (3, 1),
-(3, 2),
-(3, 4),
 (4, 1),
-(4, 2),
-(4, 4),
 (5, 1),
-(5, 4),
 (6, 1),
-(6, 4),
 (7, 1),
-(7, 4),
 (8, 1),
-(8, 4),
 (9, 1),
-(9, 2),
-(9, 3),
-(9, 4),
 (10, 1),
-(10, 2),
-(10, 3),
-(10, 4),
 (11, 1),
-(11, 4),
 (12, 1),
-(12, 4),
 (13, 1),
-(13, 4),
+(13, 2),
 (14, 1),
-(14, 4),
+(14, 2),
 (15, 1),
-(15, 4),
+(15, 2),
 (16, 1),
-(16, 4),
+(16, 2),
 (17, 1),
-(17, 4),
+(17, 2),
 (18, 1),
-(18, 4),
+(18, 2),
 (19, 1),
-(19, 4),
+(19, 2),
 (20, 1),
-(20, 4),
+(20, 2),
 (22, 1),
-(22, 4),
+(22, 2),
 (23, 1),
+(23, 9),
 (24, 1),
+(24, 9),
 (25, 1),
+(25, 9),
 (26, 1),
+(26, 7),
+(26, 9),
 (27, 1),
+(27, 8),
 (28, 1),
+(28, 8),
+(28, 9),
 (29, 1),
+(29, 2),
+(29, 4),
+(29, 8),
+(29, 9),
 (30, 1),
+(30, 2),
+(30, 8),
+(30, 9),
 (31, 1),
 (32, 1),
+(32, 8),
+(32, 9),
 (33, 1),
+(33, 8),
+(33, 9),
 (34, 1),
+(34, 8),
 (35, 1),
+(35, 6),
+(35, 7),
+(35, 9),
 (36, 1),
-(37, 1);
+(36, 6),
+(36, 8),
+(36, 9),
+(37, 4),
+(39, 1),
+(39, 9),
+(40, 1),
+(40, 8),
+(40, 9),
+(41, 1),
+(41, 8),
+(41, 9),
+(42, 1),
+(42, 8),
+(43, 1),
+(43, 8),
+(44, 1),
+(44, 9),
+(45, 1),
+(45, 9),
+(46, 8),
+(47, 8);
 
 -- --------------------------------------------------------
 
@@ -683,17 +745,19 @@ CREATE TABLE `projects` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `cost` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `client_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `brand_id` bigint(20) UNSIGNED DEFAULT NULL
+  `brand_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `assign_id` bigint(11) UNSIGNED NOT NULL,
+  `breif_id` bigint(11) UNSIGNED NOT NULL,
+  `breif_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `name`, `description`, `status`, `product_status`, `user_id`, `created_at`, `updated_at`, `cost`, `client_id`, `brand_id`) VALUES
-(15, 'test 1', '2832751', 1, 1, 1, '2022-07-27 13:29:03', '2022-07-27 13:29:03', '$2002', 2, NULL),
-(16, 'test 2', '7075247', 0, 0, 1, '2022-07-27 13:29:10', '2022-07-27 13:29:54', '$2002', 2, NULL),
-(17, 'Test 3', 'Testing project', 1, 1, 1, '2022-07-27 14:03:25', '2022-07-27 14:03:25', '$2000', 1, 1);
+INSERT INTO `projects` (`id`, `name`, `description`, `status`, `product_status`, `user_id`, `created_at`, `updated_at`, `cost`, `client_id`, `brand_id`, `assign_id`, `breif_id`, `breif_type`) VALUES
+(17, 'Test 3', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 1, 1, '2022-07-27 14:03:25', '2022-08-10 12:26:54', '$2500', 1, 3, 1, 0, 'logobreif'),
+(22, 'testing', 'lorem ipsum', 1, 1, 17, '2022-08-19 14:56:09', '2022-08-19 14:56:09', '$2000', 1, 3, 14, 1, 'logobreif');
 
 -- --------------------------------------------------------
 
@@ -717,8 +781,11 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'Admin', 'Admin', '2022-08-06 09:57:05', '2022-08-06 09:57:05'),
 (2, 'sales', 'Sales', 'Sales', '2022-08-06 09:57:07', '2022-08-06 09:57:07'),
-(3, 'production', 'Production', 'Production', '2022-08-06 09:57:07', '2022-08-06 09:57:07'),
-(4, 'client', 'Client', 'Client', '2022-08-06 09:57:07', '2022-08-06 09:57:07');
+(4, 'client', 'Client', 'Client', '2022-08-06 09:57:07', '2022-08-06 09:57:07'),
+(6, 'team lead', 'Team Lead', 'Team Lead', '2022-08-11 13:43:24', '2022-08-11 13:52:30'),
+(7, 'employee', 'Employee', 'Employee', '2022-08-11 15:09:40', '2022-08-11 15:09:40'),
+(8, 'support', 'Support', 'support', '2022-08-17 12:57:15', '2022-08-17 12:57:15'),
+(9, 'manager', 'Manager', 'Manager', '2022-08-18 11:38:32', '2022-08-18 11:38:32');
 
 -- --------------------------------------------------------
 
@@ -738,7 +805,18 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`role_id`, `user_id`, `user_type`, `team_id`) VALUES
-(1, 1, 'App\\Models\\User', NULL);
+(1, 1, 'App\\Models\\User', NULL),
+(2, 3, 'App\\Models\\User', NULL),
+(7, 4, 'App\\Models\\User', NULL),
+(4, 5, 'App\\Models\\User', NULL),
+(7, 6, 'App\\Models\\User', NULL),
+(6, 7, 'App\\Models\\User', NULL),
+(6, 11, 'App\\Models\\User', NULL),
+(7, 12, 'App\\Models\\User', NULL),
+(9, 14, 'App\\Models\\User', NULL),
+(7, 15, 'App\\Models\\User', NULL),
+(7, 16, 'App\\Models\\User', NULL),
+(8, 17, 'App\\Models\\User', NULL);
 
 -- --------------------------------------------------------
 
@@ -800,6 +878,14 @@ CREATE TABLE `sub_task` (
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `duedate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sub_task`
+--
+
+INSERT INTO `sub_task` (`id`, `task_id`, `description`, `created_at`, `updated_at`, `user_id`, `duedate`) VALUES
+(4, 1, 'this is task', '2022-08-11 16:01:27', '2022-08-11 16:01:27', 12, '2022-08-31'),
+(5, 1, 'lorem ipsum', '2022-08-18 12:00:27', '2022-08-18 12:00:27', 15, '2022-08-27');
 
 -- --------------------------------------------------------
 
@@ -872,16 +958,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `is_employee`, `last_name`, `contact`, `status`, `block`, `brand_id`, `image`) VALUES
-(1, 'farjad', 'farjad.akbar@toobitech.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-07-15 13:25:10', '2022-07-15 13:25:10', NULL, NULL, '03449349', 1, 0, 2, NULL),
+(1, 'farjad', 'farjad.akbar@toobitech.com', NULL, '$2y$10$bdxguP1d4GWlsIEjlwoGU.ftVFUbkpCEumEKUDUQw0RbuhNUyX9qG', 'D62TyLZUjbpIhaeCP9X3MfrO3yhcP9uKIxJ6mEIk68KPNXsNFswPSr4gFjOi', '2022-07-15 13:25:10', '2022-08-19 14:18:22', NULL, NULL, '03449349', 1, 0, 2, NULL),
 (2, 'Test', 'test@vomoto.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-07-18 10:27:32', '2022-07-22 11:11:29', 1, NULL, '03449349', 1, 0, 1, NULL),
-(3, 'Agent', 'sales@agent.com', NULL, '$2y$10$3mhN/hdtBxJq3sI3pyIA8OkIcKmLmQqLAWODfyiNO9tQ6kPB6XE3C', NULL, '2022-07-19 11:18:17', '2022-07-19 11:18:17', 1, NULL, '03449349', 1, 0, 2, NULL),
+(3, 'Agent', 'sales@agent.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-07-19 11:18:17', '2022-07-19 11:18:17', 1, NULL, '03449349', 1, 0, 2, NULL),
 (4, 'Agent', 'new@agent.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-07-19 11:51:18', '2022-07-19 11:51:18', 1, NULL, '03449349', 1, 0, 3, NULL),
-(5, 'Ronke', 'ronke@ronke.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-07-22 11:11:18', '2022-07-22 11:15:02', 1, NULL, NULL, 1, 0, NULL, NULL),
+(5, 'Ronke', 'ronke@ronke.com', NULL, '$2y$10$RtaKGJ20kPOqV1DyPCu0a.H2/VOvjDtju8zDr7ucKcxiJT4TuaT46', NULL, '2022-07-22 11:11:18', '2022-08-11 06:07:27', 1, NULL, NULL, 1, 0, NULL, NULL),
 (6, 'user', 'user@check.om', NULL, '$2y$10$2i.MAQx3zp.pnd7pDhbgfOy10Ip1ZJwKrt7d6utC/WDM5wYTpqN12', NULL, '2022-07-27 13:47:40', '2022-07-27 13:47:40', NULL, 'check', '098098', 1, 0, 2, NULL),
-(7, 'test', 'test@test.com', NULL, '$2y$10$dJfHP56qzxH8eYhCOOydw.C.OP6KT4C5.Et5tHqYVXeZIcElz/PsG', NULL, '2022-08-08 05:14:13', '2022-08-08 05:14:13', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(7, 'Furqan', 'furqan@gmail.com', NULL, '$2y$10$dJfHP56qzxH8eYhCOOydw.C.OP6KT4C5.Et5tHqYVXeZIcElz/PsG', NULL, '2022-08-08 05:14:13', '2022-08-12 14:04:17', NULL, NULL, NULL, 1, 0, NULL, NULL),
 (8, 'roletest', 'role@test.cp', NULL, '$2y$10$r5VPyq5r7YCoH1RA3tMBOeWnihEiLDdVYdJ3pYU4n.UgUvLYKvnqm', NULL, '2022-08-08 05:19:55', '2022-08-08 05:19:55', NULL, NULL, NULL, 1, 0, NULL, NULL),
 (9, 'lksd', 'lksd@gmail.com', NULL, '$2y$10$4fygifU2GP/52wxhZYAKk.BQI49Iual0BRs7OQPACc5WC9vnoMU4O', NULL, '2022-08-08 05:21:27', '2022-08-08 05:21:27', NULL, NULL, NULL, 1, 0, NULL, NULL),
-(10, 'kasdj', 'kasdj@gmail.com', NULL, '$2y$10$1YquqtHGfKfu9p.x641jYeegYRPDUmmj2cBLgFgJH4lAbD6oA7dzq', NULL, '2022-08-08 05:22:30', '2022-08-08 05:22:30', NULL, NULL, NULL, 1, 0, NULL, NULL);
+(10, 'kasdj', 'kasdj@gmail.com', NULL, '$2y$10$1YquqtHGfKfu9p.x641jYeegYRPDUmmj2cBLgFgJH4lAbD6oA7dzq', NULL, '2022-08-08 05:22:30', '2022-08-08 05:22:30', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(11, 'Abeer', 'abeer@gmail.com', NULL, '$2y$10$t8h60pB5sGWdBBNPmpG9uuknJyjcEJ3fidsWD4QxSY0MnQWTYPYbe', NULL, '2022-08-11 13:49:49', '2022-08-11 13:49:49', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(12, 'farjad', 'farjadakbar4@gmail.com', NULL, '$2y$10$G2Coreb0cbhTTXMG/OtziOLD0TcJsclih5ulOfDTd7pnN1NSOnznO', NULL, '2022-08-11 15:10:21', '2022-08-11 15:10:21', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(13, 'newagent', 'newagent@gmail.com', NULL, '$2y$10$57sdyfLHBWgR/FLC.duEp.SLOeJ57Hwo.s/oLNNm/s5YOwJdZE3rS', NULL, '2022-08-12 10:12:45', '2022-08-12 10:12:45', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(14, 'newcat', 'newcat@gmail.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-08-12 10:23:17', '2022-08-12 10:23:17', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(15, 'ma', 'ma@gmail.com', NULL, '$2y$10$tqxFGjaa47KRMzhoRmjFfewQrXvkXaWtijaq/pt9anZwZnB2fTvhK', NULL, '2022-08-12 10:24:54', '2022-08-12 10:24:54', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(16, 'Hassan', 'hassan@gmail.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-08-12 12:06:52', '2022-08-12 12:06:52', NULL, NULL, NULL, 1, 0, NULL, NULL),
+(17, 'haider', 'haider@gmail.com', NULL, '$2y$10$tAurgOk49RQj1y2JVbBhXODyDntD2LMo3W9bomzVwe4amycKjFtR.', NULL, '2022-08-12 12:34:13', '2022-08-12 12:34:13', NULL, NULL, NULL, 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -910,21 +1003,11 @@ CREATE TABLE `website_forms` (
   `additional_information` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
+  `brand_id` bigint(11) UNSIGNED NOT NULL,
   `agent_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `website_forms`
---
-
-INSERT INTO `website_forms` (`id`, `website_title`, `purpose`, `objective`, `project_target`, `brand_target`, `desired_reaction`, `competitor`, `design`, `functionality`, `postive_aspects`, `negative_aspects`, `traffic_levels`, `current_performance`, `currrent_hosting`, `negative_hosting`, `filesname`, `additional_information`, `user_id`, `invoice_id`, `agent_id`, `created_at`, `updated_at`) VALUES
-(1, 'ssd', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', '[\"165878201094.png\",\"165878201073.png\"]', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 2, 1, 1, '2022-07-25 15:46:50', '2022-07-25 15:46:50'),
-(2, 'dsfas', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', '[\"165878296731.png\",\"165878296712.png\",\"165878296772.png\"]', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 2, 1, 1, '2022-07-25 16:02:47', '2022-07-25 16:02:47'),
-(3, 'dsfas', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', NULL, 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', '[\"165878307437.png\",\"165878307478.png\",\"165878307421.png\"]', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknownLorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown', 2, 1, 1, '2022-07-25 16:04:34', '2022-07-25 16:04:34'),
-(4, 'sd', 'sad', 'sd', NULL, 'sd', 'asd', 'sd', 'asd', NULL, 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', '[\"165893650087.png\"]', 'asd', 2, 1, 1, '2022-07-27 10:41:40', '2022-07-27 10:41:40'),
-(5, 'Testing project', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', NULL, 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', NULL, 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', '[]', 'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.', 1, 1, 1, '2022-07-27 14:03:25', '2022-07-27 14:03:25');
 
 --
 -- Indexes for dumped tables
@@ -1012,7 +1095,8 @@ ALTER TABLE `invoices`
 -- Indexes for table `logo_forms`
 --
 ALTER TABLE `logo_forms`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foreign_brand_key` (`brand_id`);
 
 --
 -- Indexes for table `messages`
@@ -1093,7 +1177,8 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`),
   ADD KEY `projects_user_id_foreign` (`user_id`),
   ADD KEY `projects_client_id_foreign` (`client_id`),
-  ADD KEY `projects_brand_id_foreign` (`brand_id`);
+  ADD KEY `projects_brand_id_foreign` (`brand_id`),
+  ADD KEY `foreign_assign_id` (`assign_id`);
 
 --
 -- Indexes for table `roles`
@@ -1159,7 +1244,8 @@ ALTER TABLE `users`
 -- Indexes for table `website_forms`
 --
 ALTER TABLE `website_forms`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foreign__web_brand_key` (`brand_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1169,7 +1255,7 @@ ALTER TABLE `website_forms`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -1187,13 +1273,13 @@ ALTER TABLE `client_files`
 -- AUTO_INCREMENT for table `create_categories`
 --
 ALTER TABLE `create_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1241,7 +1327,7 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1253,13 +1339,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -1277,7 +1363,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `sub_task`
 --
 ALTER TABLE `sub_task`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -1295,7 +1381,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `website_forms`
@@ -1368,6 +1454,12 @@ ALTER TABLE `invoices`
   ADD CONSTRAINT `invoices_service_foreign` FOREIGN KEY (`service`) REFERENCES `services` (`id`);
 
 --
+-- Constraints for table `logo_forms`
+--
+ALTER TABLE `logo_forms`
+  ADD CONSTRAINT `foreign_brand_key` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`);
+
+--
 -- Constraints for table `message_files`
 --
 ALTER TABLE `message_files`
@@ -1400,9 +1492,10 @@ ALTER TABLE `permission_user`
 -- Constraints for table `projects`
 --
 ALTER TABLE `projects`
+  ADD CONSTRAINT `foreign_assign_id` FOREIGN KEY (`assign_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `projects_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   ADD CONSTRAINT `projects_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
-  ADD CONSTRAINT `projects_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `projects_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `role_user`
@@ -1432,6 +1525,12 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`);
+
+--
+-- Constraints for table `website_forms`
+--
+ALTER TABLE `website_forms`
+  ADD CONSTRAINT `foreign__web_brand_key` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
