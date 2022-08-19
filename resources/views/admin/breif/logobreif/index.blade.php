@@ -15,12 +15,12 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Invoice No.</th>
-                            <th>Title</th>
-                            <th>Slogan</th>
-                            <th>Files</th>
+                            <th>Id</th>
+                            <th>Invoice#</th>
+                            <th>Logo Name</th>
                             <th>Client</th>
                             <th>Agent</th>
+                            <th>Brand</th>
                             @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
                                 <th>Action</th>
                             @endif
@@ -28,12 +28,12 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Invoice No.</th>
-                            <th>Title</th>
-                            <th>Slogan</th>
-                            <th>Files</th>
+                            <th>Id</th>
+                            <th>Invoice#</th>
+                            <th>Logo Name</th>
                             <th>Client</th>
                             <th>Agent</th>
+                            <th>Brand</th>
                             @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
                                 <th>Action</th>
                             @endif
@@ -42,25 +42,16 @@
                     <tbody>
                         @foreach ($breifs as $breif)
                             <tr>
-                                <td><span class="btn btn-dark">#{{ $breif->invoice->invoice_number }}</span></td>
+                                <td>{{ $breif->id }}</td>
+                                <td><span class="btn btn-dark">#{{$breif->invoice->invoice_number}}</span></td>
                                 <td class="text-capitalize">{{ $breif->logo_name }}</td>
-                                <td>{{ $breif->slogan}}</td>
-                                <td>
-                                    @php
-                                        $filesname = json_decode($breif->filesname)
-                                    @endphp 
-                                    @if(is_array($filesname))
-                                    {{ count($filesname)}}
-                                    {{-- @else
-                                        1 --}}
-                                    @endif   
-                                </td>
-                                <td>{{ $breif->client->name }}</td>
-                                <td>{{ $breif->agent->name }}</td>
+                                <td>{{ $breif->agent->name }}<br>{{$breif->agent->email}}</td>
+                                <td>{{ $breif->client->name }}<br>{{$breif->client->email}}</td>
+                                <td><span class="btn btn-blue">{{ $breif->brand->name }}</span></td>
                                 @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
                                     <td>                                        
                                         @permission('project-assign')
-                                            <a href="{{ url("create/$breif->invoice_id")}}" class="btn btn-info">
+                                            <a href="{{ url("create/logobreif/$breif->id")}}" class="btn btn-info">
                                                 <i class="fa fa-user"></i> Assign
                                             </a>
                                         @endpermission                                        

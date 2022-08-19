@@ -42,12 +42,12 @@
                                 <td> {{ $user->email ?? 'The model doesn\'t have a `email` attribute' }}</td>
                                 <td>
                                     @foreach ($user->category->pluck('name') as $category)
-                                        <button type="button" class="btn btn-blue">{{ $category }}</button>
+                                        <span type="button" class="badge badge-info">{{ $category }}</span>
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach ($user->role->pluck('name') as $roles)
-                                        <button type="button" class="btn btn-dark">{{ $roles }}</button>
+                                        {{ $roles }}
                                     @endforeach
                                     {{-- {{ $user->roles_count }} --}}
                                 </td>

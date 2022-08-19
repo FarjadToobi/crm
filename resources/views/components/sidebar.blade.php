@@ -130,6 +130,7 @@
 
             {{-- @permission('breif-access') --}}
             <!-- Nav Item - Utilities Collapse Menu -->
+            @if (Auth::user()->hasPermission(['logobreif-access', 'webbreif-access']))
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -149,6 +150,7 @@
                     </div>
                 </div>
             </li>
+            @endif
             {{-- @endpermission --}}
 
 
@@ -212,6 +214,7 @@
 
             {{-- @permission('manage-user') --}}
             <!-- Nav Item - Utilities Collapse Menu -->
+            @role('admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSetting"
                     aria-expanded="true" aria-controls="collapseSetting">
@@ -228,6 +231,7 @@
                     </div>
                 </div>
             </li>
+            @endrole
             {{-- @endpermission --}}
 
             {{-- @endrole --}}

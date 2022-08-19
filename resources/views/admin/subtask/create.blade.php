@@ -37,12 +37,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // Create a new list item when clicking on the "Add" button
-        // $(document).ready( function() {
-
-
-        // });
-    </script>
 @endsection

@@ -45,4 +45,5 @@ class Invoices extends Model
     {
         return $this->hasOne(Services::class, 'id', 'service');
     }
+
 }

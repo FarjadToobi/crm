@@ -8,7 +8,7 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email or Username</label>
             <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                placeholder="Enter your email or username" autofocus="">
+                placeholder="Enter your email or username" autofocus="" required>
 
             @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
             </div>
             <div class="input-group input-group-merge">
                 <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
-                    name="password" placeholder="············" aria-describedby="password">
+                    name="password" placeholder="············" aria-describedby="password" required>
                 {{-- <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> --}}
             </div>
             @error('password')
@@ -52,8 +52,8 @@
 
     <p class="text-center">
         <span>New on our platform?</span>
-        <a href="{{ route('register') }}">
+        {{-- <a href="{{ route('register') }}">
             <span>Create an account</span>
-        </a>
+        </a> --}}
     </p>
 @endsection

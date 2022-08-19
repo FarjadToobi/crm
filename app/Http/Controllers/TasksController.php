@@ -22,7 +22,12 @@ class TasksController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('task-access')) abort(403);
-        $tasks = Tasks::all();
+        if(Auth()->user()->hasRole('admin')){
+            $tasks = Tasks::all();
+        }
+        else{
+            $tasks = Tasks::all();
+        }
         return view('admin.tasks.index', compact('tasks'));
     }
 
@@ -35,7 +40,12 @@ class TasksController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('create-task')) abort(403);
-        $project = Projects::where('brand_id', '!=', '')->get();
+        if(Auth()->user()->hasRole('manager')){
+            $project = Projects::whereIn('assign_id', Auth()->user())->get();            
+        }
+        else{
+            $project = Projects::where('brand_id', '!=', '')->get();
+        }
         $category = Category::select('id', 'name')->get();
         return view('admin.tasks.create', compact('project', 'category'));
     }
@@ -43,8 +53,7 @@ class TasksController extends Controller
     public function taskproject($id)
     {
         $project = Projects::find($id);
-        $category = Category::select('id', 'name')->get();
-        return view('admin.tasks.create', compact('id', 'project', 'category'));
+        return view('admin.tasks.create', compact('id', 'project'));
     }
 
     /**

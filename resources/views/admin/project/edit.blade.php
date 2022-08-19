@@ -13,58 +13,34 @@
             </div>
             <div class="card-body">
                 <div class="form-row">
+                    <input name="cost" type="hidden" value="{{  $project->cost }}" readonly/>
                     <div class="col-md-4">
-                        <x-input name="user_id" label="Added By" type="text" placeholder="John Doe"
-                            value="{{ $project->user->name }}" readonly />
+                        <x-select name="client" label="Client" :collection="$clients" :selected="$project->client_id"/>
                     </div>
-
                     <div class="col-md-4">
-                        <input name="client" type="hidden" value="{{ $project->client->id }}" readonly />
-                        <x-input name="client_name" label="Client" type="text" placeholder="John Doe"
-                            value="{{ $project->client->name }}" readonly />
+                        <x-select name="category[]" label="Category" :collection="$category" multiple="multiple"/>
                     </div>
-
+                    
                     <div class="col-md-4">
-                        <x-input name="brand_id" label="Brand" type="text" placeholder="John Doe"
-                            value="{{ $project->brand->name }}" readonly />
+                        <x-select name="assign_id" label="Assign To" :collection="$users" :selected="$project->assign_id" />
                     </div>
 
+                    
+                    
                     <div class="col-md-6">
-                        <x-input name="name" label="Project Name" type="text" placeholder="John Doe"
-                            value="{{ $project->name }}" />
+                        <x-input name="name" label="Name" type="text" value="{{ $project->name }}" placeholder="Name" />
                     </div>
+                    
                     <div class="col-md-6">
-                        <x-input name="cost" label="Cost" type="text" placeholder="2000"
-                            value="{{ $project->cost }}" />
+                        <x-select name="status" label="Status" :collection="$status" :selected="$project->status"/>
                     </div>
-
-
-                    <div class="col-md-6">
-                        <x-select name="category" label="Categroy" id="category" :collection="$category" :selected="$project->project_category[0]->id" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control @error('status') is-invalid @enderror" id="status" name="status"
-                                autofocus="">
-                                <option value="1" {{ $project->status == '1' ? 'selected' : '' }}>Complete</option>
-                                <option value="0" {{ $project->status == '0' ? 'selected' : '' }}>Inprogress</option>
-                            </select>
-
-                            @error('status')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
 
                     <div class="col-md-12">
-                        <x-textarea name="description" label="Description" type="text" placeholder="lorem ipsum">
-                            {{ $project->description }}</x-textarea>
+                        <x-textarea name="description" label="Description"
+                            placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis, accusamus?">
+                            {{ $project->description }}
+                        </x-textarea>
                     </div>
-
                 </div>
 
                 <button type="submit" class="btn btn-primary ">

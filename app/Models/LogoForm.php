@@ -22,6 +22,7 @@ class LogoForm extends Model
         'user_id',
         'invoice_id',
         'agent_id',
+        'brand_id'
     ];
 
     public function client()
@@ -31,11 +32,16 @@ class LogoForm extends Model
 
     public function invoice()
     {
-        return $this->hasOne(Invoices::class, 'id', 'invoice_id')->select('invoice_number');
+        return $this->hasOne(Invoices::class, 'id', 'invoice_id')->select('invoice_number', 'amount');
     }
     
     public function agent()
     {
         return $this->hasOne(User::class, 'id', 'agent_id');
+    }
+
+    public function brand()
+    {
+        return $this->hasOne(Brands::class, 'id', 'brand_id');
     }
 }

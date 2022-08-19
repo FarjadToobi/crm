@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Projects;
 use App\Models\Clients;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Status;
+use App\Models\Invoices;
 use App\Models\ProjectCategory;
+use App\Models\LogoForm;
+use App\Models\WebsiteForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +24,15 @@ class ProjectsController extends Controller
     public function index()
     {
         if (!Auth::user()->hasPermission('project-access')) abort(403);
-        $projects = Projects::whereIn('brand_id', Auth()->user()->brand_list())->get();
+        if(Auth()->user()->hasRole('admin')){
+            $projects = Projects::all();            
+        }
+        else if(Auth()->user()->hasRole('manager')){
+            $projects = Projects::whereIn('assign_id', Auth()->user())->where('status', '=', '1')->get();            
+        }
+        else{
+            $projects = Projects::whereIn('brand_id', Auth()->user()->brand_list())->get();
+        }
         return view('admin.project.index', compact('projects'));
     }
 
@@ -28,12 +41,25 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function asignproject($name, $id)
     {
         // $client = Clients::where('status', 1)->whereIn('brand_id', Auth()->user()->brand_list())->get();
-        $invoice = Invoices::find($id);
-        $category = Category::where('status', 1)->get();
-        return view('admin.project.create', compact('client', 'category'));
+        if (!Auth::user()->hasPermission('create-project')) abort(403);
+        if($name=="logobreif"){
+            $breif = LogoForm::where('id', '=', $id)->select('invoice_id')->first();
+        }
+        else{
+            $breif = WebsiteForm::where('id', '=', $id)->select('invoice_id')->first();
+        }
+        $invoice = Invoices::find($breif->invoice_id);
+        $users = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'manager');
+            }
+        )->get();
+        $category = Category::whereIn('service_id', $invoice->services)->where('status', 1)->get();
+        $status = Status::all();
+        return view('admin.project.create', compact('invoice', 'category', 'users', 'status', 'name', 'id'));
     }
 
     /**
@@ -56,6 +82,13 @@ class ProjectsController extends Controller
         $request->request->add(['client_id' => $request->input('client')]);
         $request->request->add(['user_id' => auth()->user()->id]);
         $product = Projects::create($request->all());
+        $category = $request->input('category');
+        for($i = 0; $i < count($category); $i++){
+            $project_category = new ProjectCategory();
+            $project_category->project_id = $product->id;
+            $project_category->category_id = $category[$i];
+            $project_category->save();
+        }
         
         return redirect()->back()->with('success', 'Project created Successfully.');
     }
@@ -82,7 +115,8 @@ class ProjectsController extends Controller
         $clients = Clients::where('status', 1)->whereIn('brand_id', Auth()->user()->brand_list())->get();
         $project = Projects::whereIn('brand_id', Auth()->user()->brand_list())->where('id', $id)->first();
         $category = Category::where('status', 1)->get();
-        return view('admin.project.edit', compact('project', 'category', 'clients'));
+        $status = Status::all();
+        return view('admin.project.edit', compact('project', 'category', 'clients', 'status'));
     }
 
     /**
@@ -117,8 +151,15 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Projects $project)
+    public function destroy($id)
     {
         //
+        if (!Auth::user()->hasPermission('delete-project')) abort(403);
+        try {
+            Projects::destroy($id);
+            return back()->with('success', "Delete successfully");
+        } catch (\Exception $e) {
+            return back()->with('error', json_encode($e->getMessage()));
+        }
     }
 }

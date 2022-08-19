@@ -15,7 +15,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Invoice No.</th>
+                            <th>Id</th>
+                            <th>Invoice#</th>
                             <th>Title</th>
                             <th>Purpose</th>
                             <th>Files</th>
@@ -28,7 +29,8 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Invoice No.</th>
+                            <th>Id</th>
+                            <th>Invoice#</th>
                             <th>Title</th>
                             <th>Purpose</th>
                             <th>Files</th>
@@ -42,7 +44,8 @@
                     <tbody>
                         @foreach ($breifs as $breif)
                             <tr>
-                                <td><span class="btn btn-dark">#{{ $breif->invoice->invoice_number }}</span></td>
+                                <td>{{ $breif->id }}</td>
+                                <td><span class="btn btn-dark">{{$breif->invoice->invoice_number}}</span></td>
                                 <td class="text-capitalize">{{ $breif->website_title }}</td>
                                 <td>{{ Str::limit($breif->purpose, 50)}}</td>
                                 <td>
@@ -59,6 +62,11 @@
                                 <td>{{ $breif->agent->name }}</td>
                                 @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
                                     <td>
+                                        @permission('project-assign')
+                                            <a href="{{ url("create/webbreif/$breif->id")}}" class="btn btn-info">
+                                                <i class="fa fa-user"></i> Assign
+                                            </a>
+                                        @endpermission    
                                         @permission('edit-webbreif')
                                             <a href="{{ route('webbreif.edit', $breif->id) }}" class="btn btn-primary"><i
                                                     class="fas fa-pen"></i> Edit</a>

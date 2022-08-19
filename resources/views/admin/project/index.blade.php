@@ -18,7 +18,7 @@
                             <th>User Name</th>
                             <th>Brand</th>
                             <th>Amount</th>
-                            <th>Categroy</th>
+                            <th>Assign To</th>
                             <th>Status</th>
                             @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project']))
                                 <th>Action</th>
@@ -32,7 +32,7 @@
                             <th>User Name</th>
                             <th>Brand</th>
                             <th>Amount</th>
-                            <th>Categroy</th>
+                            <th>Assign To</th>
                             <th>Status</th>
                             @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project']))
                                 <th>Action</th>
@@ -44,10 +44,10 @@
                             <tr>
                                 <td>{{ $project->id }}</td>
                                 <td class="text-capitalize">{{ $project->name }}</td>
-                                <td>{{ $project->client->name }}<br /> {{ $project->client->email }}</td>
+                                <td>{{ $project->user->name }}<br /> {{ $project->user->email }}</td>
                                 <td><span class="btn btn-blue">{{ $project->brand->name }}</span></td>
                                 <td>{{ $project->cost }}</td>
-                                <td>{{ $project->project_category[0]->name }}</td>
+                                <td>{{ isset($project->assign->name) ? $project->assign->name : ''}}</td>
                                 <td><button
                                         class="btn btn-{{ $project->status == '1' ? 'success' : 'danger' }} ">{{ $project->status == '1' ? 'Active' : 'Deactive' }}
                                     </button>
@@ -58,8 +58,10 @@
                                             <a href="{{ route('messages.show', $project->client_id) }}" class="btn btn-white"><i
                                                     class="fas fa-comment"></i> Messages</a>
                                         @endpermission
-                                        {{-- <a href="{{ route('messages.show', $project->client_id) }}" class="btn btn-info"><i
-                                            class="fas fa-copy"></i> View Form</a> --}}
+
+                                        <a href="{{ route("$project->breif_type.show", $project->breif_id) }}" class="btn btn-info"><i
+                                            class="fas fa-copy"></i> View Form</a>
+
                                         @permission('create-task')
                                             <a href="{{ url('taskproject/' . $project->id) }}" class="btn btn-dark"><i
                                                     class="fa fa-plus"></i> Create Task</a>
@@ -68,9 +70,41 @@
                                             <a href="{{ route('project.edit', $project->id) }}" class="btn btn-primary"><i
                                                     class="fa fa-pen"></i> Edit</a>
                                         @endpermission
+                                        @permission('delete-project')                                        
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_{{$project->id}}">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+                                        @endpermission
                                     </td>
                                 @endif
                             </tr>
+                            @permission('delete-project')
+ <!-- Modal -->
+ <div class="modal fade top-30" id="delete_{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="delete_{{$project->id}}Label" aria-hidden="true">
+    <form action="{{route('project.destroy', $project->id)}}" method="post">
+        @csrf
+        @method('DELETE')
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $project->name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Are You Really Want To Delete this?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+</div>
+                            @endpermission
                         @endforeach
                     </tbody>
                 </table>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\LogoForm;
 use App\Models\WebsiteForm;
 use App\Models\Invoices;
+use App\Models\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,8 @@ class BreifProjectController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('add-breif')) abort(403);
-        $invoice = Invoices::where('client_id', Auth::user()->id)->get();
-        dd($invoice);
+        $client = Clients::where('email', '=', Auth::user()->email)->select('id')->first();
+        $invoice = Invoices::where('client_id', '=', $client->id)->first();        
         return view('admin.breif.create', compact('invoice'));
     }
 
@@ -25,8 +26,8 @@ class BreifProjectController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('add-breif')) abort(403);
-        $invoice = Invoices::where('client_id', Auth::user()->id)->first();
-        dd($invoice);
+        $client = Clients::where('email', '=', Auth::user()->email)->select('id')->first();
+        $invoice = Invoices::where('client_id', '=', $client->id)->first();   
         return view('admin.breif.create', compact('invoice'));
     }
 
@@ -47,7 +48,8 @@ class BreifProjectController extends Controller
                 // $files['name'] = $fileName;
                 array_push($files, $fileName);
             }
-        }
+        }   
+        
         if ($request->service == "logoservice") {
             $request->validate([
                 'title' => 'required',
@@ -59,7 +61,7 @@ class BreifProjectController extends Controller
                 'business_overview' => 'required',
                 'target_audience' => 'required',
             ]);
-
+            
             LogoForm::create([
                 'logo_name' => $request->title,
                 'slogan' => $request->logo_slogan,
@@ -74,6 +76,7 @@ class BreifProjectController extends Controller
                 'user_id' => $request->client_id,
                 'invoice_id' => $request->invoice_id,
                 'agent_id' => $request->agent_id,
+                'brand_id' => $request->brand_id
             ]);
         } else {
             $request->validate([
@@ -101,8 +104,18 @@ class BreifProjectController extends Controller
                 'additional_information' => $request->additional_information,
                 'user_id' => $request->client_id,
                 'invoice_id' => $request->invoice_id,
+                'brand_id' => $request->brand_id,
                 'agent_id' => $request->agent_id,
             ]);
+
+            // Project::create([
+            //     'name' => $request->title,
+            //     'description' => $request->description,
+            //     'user_id' => $request->user_id,
+            //     'cost' => $request->cost,
+            //     'client_id' => $request->client_id,
+            //     'brand_id' => $request->brand
+            // ]);
         }
         return redirect()->back()->with('success', 'Inserted Successfully');
     }

@@ -35,7 +35,7 @@
 
 
                     <div class="col-md-6">
-                        <x-select name="category" label="Category" :collection="$category" />
+                        <x-select name="category" label="Category" :collection="$project->project_category" />
                     </div>
 
 

@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('breif', Client\BreifProjectController::class);
 
-    Route::any('create/{id}', [App\Http\Controllers\ProjectsController::class, 'create']);
+    Route::any('create/{name}/{id}', [App\Http\Controllers\ProjectsController::class, 'asignproject']);
     Route::any('{id}/lead', [App\Http\Controllers\ClientsController::class, 'lead']);
     Route::get('taskproject/{id}', [App\Http\Controllers\TasksController::class, 'taskproject']);
     Route::get('subtaskbyid/{id}', [App\Http\Controllers\SubtaskController::class, 'subtaskbyid']);

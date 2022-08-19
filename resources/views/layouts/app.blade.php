@@ -28,6 +28,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 </head>
 
 <body id="page-top">
@@ -129,43 +133,54 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
+    {{-- Select 2 dropdown scripts --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         $('input[type="file"] ').removeAttr('required');
         function newElement() {
-                var inputDesc = $("#sub_description").val();
-                var inputDate = $("#sub_date").val();
-                var i= $('#mysublist tr').length + 1;
+            var inputDesc = $("#sub_description").val();
+            var inputDate = $("#sub_date").val();
+            var i= $('#mysublist tr').length + 1;
 
-                $("#mysublist").append(
-                    `<tr>
-                        <td>`+ i +`</td>
-                        <td><input class="border-0 form-control" type="test" name="subDes[]" value="`+ inputDesc +`" readonly /></td>
-                        <td><input class="border-0 form-control" type="test" name="subDate[]" value="`+ inputDate +`" readonly /></td>
-                        <td>
-                            <button type="button" id="subedit" class="btn"><i class="fas fa-pen text-primary"></i></button>
-                            <button type="button" id="subdel"  class="btn"><i class="fas fa-trash text-danger"></i></button>
-                        </td>
-                    </tr>`);
+            $("#mysublist").append(
+                `<tr>
+                    <td>`+ i +`</td>
+                    <td><input class="border-0 form-control" type="test" name="subDes[]" value="`+ inputDesc +`" readonly /></td>
+                    <td><input class="border-0 form-control" type="test" name="subDate[]" value="`+ inputDate +`" readonly /></td>
+                    <td>
+                        <button type="button" id="subedit" class="btn"><i class="fas fa-pen text-primary"></i></button>
+                        <button type="button" id="subdel"  class="btn"><i class="fas fa-trash text-danger"></i></button>
+                    </td>
+                </tr>`);
 
-                    $("#sub_description").val("");
-                    $("#sub_date").val("");
+                $("#sub_description").val("");
+                $("#sub_date").val("");
 
-            }
-            $(document).ready(function() {
-                // setInterval(() => {
-                    $("#sub_description").removeAttr('required');
-                    $("#sub_date").removeAttr('required');
+        }
+        $(document).ready(function() {
+            // setInterval(() => {
+                $("#sub_description").removeAttr('required');
+                $("#sub_date").removeAttr('required');
 
-                        
-                    $("#mysublist").on("click", "#subdel", function () {
-                        $(this).closest('tr').remove();
-                        var i= $('#mysublist tr').length + 1;        
-                    }).on("click", "#subedit", function() {
-                        // var row = $(this).closest('tr').toggleClass("editing");
-                        // row.find("td input").slice(0, 3).removeAttr("readonly"), row.hasClass("editing"));
-                    });
-                // }, 1000);
+                    
+                $("#mysublist").on("click", "#subdel", function () {
+                    $(this).closest('tr').remove();
+                    var i= $('#mysublist tr').length + 1;        
+                }).on("click", "#subedit", function() {
+                    // var row = $(this).closest('tr').toggleClass("editing");
+                    // row.find("td input").slice(0, 3).removeAttr("readonly"), row.hasClass("editing"));
+                });
+            // }, 1000);
+
+
+            $("select").select2({
+                allowClear: false,
+                placeholder: "select",
             });
+        });
+
+        
     </script>
 </body>
 
