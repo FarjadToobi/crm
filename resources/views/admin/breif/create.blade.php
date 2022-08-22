@@ -9,7 +9,7 @@
             {{-- <a href="{{ route('logobreif.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a> --}}
         </div>
         <div class="card-body">
-            @if ($invoice[0]->payment_status != 1)
+            @if ($invoice->payment_status != 1)
                 <p class="lead text-center">Invoice Not Paid</p>
             @else
                 <form id="formAuthentication" class="mb-3" action="{{ route('breif.store') }}" method="POST"
@@ -17,10 +17,10 @@
                     @csrf
                     <h4>Details</h4>
                     <div class="form-row">
-                        <input type="hidden" name="invoice_id" id="invoice_id" value="{{ $invoice[0]->id }}" />
-                        <input type="hidden" name="agent_id" id="agent_id" value="{{ $invoice[0]->sales_agent_id }}" />
-                        <input type="hidden" name="client_id" id="client_id" value="{{ $invoice[0]->client_id }}" />
-                        <input type="hidden" name="brand_id" id="brand_id" value="{{ $invoice[0]->brand }}" />                     
+                        <input type="hidden" name="invoice_id" id="invoice_id" value="{{ $invoice->id }}" />
+                        <input type="hidden" name="agent_id" id="agent_id" value="{{ $invoice->sales_agent_id }}" />
+                        <input type="hidden" name="client_id" id="client_id" value="{{ $invoice->client_id }}" />
+                        <input type="hidden" name="brand_id" id="brand_id" value="{{ $invoice->brand }}" />                     
                         <div class="col-md-4">
                             <x-input name="name" label="Name" type="text" placeholder="KFC"
                                 value="{{ Auth::user()->name }}" readonly />
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <hr>
-                    @if ($invoice[0]->services->name == 'Logo designing')
+                    @if ($invoice->services->name == 'Logo designing')
                         <x-logo-form />
                     @else
                         <x-web-form 

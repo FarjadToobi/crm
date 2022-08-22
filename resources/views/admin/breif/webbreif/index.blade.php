@@ -19,9 +19,9 @@
                             <th>Invoice#</th>
                             <th>Title</th>
                             <th>Purpose</th>
-                            <th>Files</th>
                             <th>Client</th>
                             <th>Agent</th>
+                            <th>Files</th>
                             @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
                                 <th>Action</th>
                             @endif
@@ -33,9 +33,9 @@
                             <th>Invoice#</th>
                             <th>Title</th>
                             <th>Purpose</th>
-                            <th>Files</th>
                             <th>Client</th>
                             <th>Agent</th>
+                            <th>Files</th>
                             @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
                                 <th>Action</th>
                             @endif
@@ -48,6 +48,8 @@
                                 <td><span class="btn btn-dark">{{$breif->invoice->invoice_number}}</span></td>
                                 <td class="text-capitalize">{{ $breif->website_title }}</td>
                                 <td>{{ Str::limit($breif->purpose, 50)}}</td>
+                                <td>{{ $breif->client->name }}</td>
+                                <td>{{ $breif->agent->name }}</td>
                                 <td>
                                     @php
                                         $filesname = json_decode($breif->filesname)
@@ -58,8 +60,6 @@
                                         1 --}}
                                     @endif   
                                 </td>
-                                <td>{{ $breif->client->name }}</td>
-                                <td>{{ $breif->agent->name }}</td>
                                 @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
                                     <td>
                                         @permission('project-assign')

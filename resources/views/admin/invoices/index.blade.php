@@ -21,6 +21,7 @@
                             <th>Agent</th>
                             <th>Brand</th>
                             <th>Amount</th>
+                            <th>Status</th>
                             @if(Auth::user()->hasPermission(['edit-lead','show-lead']))
                             <th>Action</th>
                             @endif
@@ -35,6 +36,7 @@
                             <th>Agent</th>
                             <th>Brand</th>
                             <th>Amount</th>
+                            <th>Status</th>
                             @if(Auth::user()->hasPermission(['edit-lead','show-lead']))
                             <th>Action</th>
                             @endif
@@ -50,6 +52,11 @@
                                     <td class="small">{{$invoice->user->name}}<br /> {{$invoice->user->email}}</td>                            
                                     <td><span class="btn btn-blue">{{ $invoice->brands ? $invoice->brands->name : '' }}</span></td> 
                                     <td>{{ $invoice->currencies->sign . $invoice->amount }}</td>
+                                    <td>
+                                        <span class="btn {{ $invoice->payment_status == 1 ? 'btn-success' : 'btn-danger' }}">
+                                            {{ $invoice->payment_status == 1 ? 'Paid' : 'UnPaid' }}
+                                        </span>
+                                    </td>
                                     @if(Auth::user()->hasPermission(['edit-lead','show-lead']))                            
                                     <td>
                                         @permission('edit-lead')

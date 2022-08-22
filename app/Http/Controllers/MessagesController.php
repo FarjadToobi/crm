@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Messages;
 use App\Models\MessageFiles;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class MessagesController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('messages-access')) abort(403);
+        $users = User::all();
         $messages = Messages::latest()->get()->unique('name');
-        return view('admin.messages.allmessages', compact('messages'));
+        return view('admin.messages.allmessages', compact('messages', 'users'));
     }
 
 
@@ -36,13 +38,20 @@ class MessagesController extends Controller
             'message' => 'required'
         ]);
 
+        $data = [
+            'name' => Auth::user()->name,
+            'message' => $request->message,
+            'sender_id' => Auth::id(),
+            'receiver_id' => $request->receiver_id,
+        ];
+
         $messages =  Messages::create([
             'name' => Auth::user()->name,
             'message' => $request->message,
             'sender_id' => Auth::id(),
-            'reciver_id' => $request->reciver_id,
+            'receiver_id' => $request->receiver_id,
         ]);
-
+        
         if ($request->file('files')) {
             $files = [];
             foreach ($request->file('files') as $key => $file) {

@@ -29,13 +29,14 @@ class WebsiteForm extends Model
         'additional_information',
         'user_id',
         'invoice_id',
+        'brand_id',
         'agent_id',
     ];
 
     
     public function client()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(Clients::class, 'id', 'user_id');
     }
 
     public function invoice()
@@ -47,4 +48,5 @@ class WebsiteForm extends Model
     {
         return $this->hasOne(User::class, 'id', 'agent_id');
     }
+    
 }

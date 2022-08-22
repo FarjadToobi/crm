@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Packages;
 use App\Models\Services;
 use App\Models\Currencies;
+use App\Models\Invoices;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -91,7 +92,10 @@ class ClientsController extends Controller
         //
         if (!Auth::user()->hasPermission('show-client')) abort(403);
         $client = Clients::find($id);
-        return view('admin.clients.view', compact('client'));
+        $clientpaid = Invoices::groupBy('currency')->where('payment_status', '=', '1')->where('client_id', '=', $id)->select('currency',  \DB::raw('sum(amount) as amount'))->get();
+        $clientunpaid = Invoices::groupBy('currency')->where('payment_status', '=', '0')->where('client_id', '=', $id)->select('currency',  \DB::raw('sum(amount) as amount'))->get();
+
+        return view('admin.clients.view', compact('client', 'clientpaid', 'clientunpaid'));
     }
 
     /**
@@ -191,7 +195,7 @@ class ClientsController extends Controller
 
     public function lead($id)
     {
-        if (!Auth::user()->hasPermission('show-lead')) abort(403);
+        if (!Auth::user()->hasPermission('create-lead')) abort(403);
 
         $client = Clients::find($id);
         $packages = Packages::all();
@@ -200,4 +204,5 @@ class ClientsController extends Controller
 
         return view('admin.clients.lead', compact('packages', 'currencies', 'services', 'client'));
     }
+
 }

@@ -54,7 +54,7 @@ class ProjectsController extends Controller
         $invoice = Invoices::find($breif->invoice_id);
         $users = User::whereHas(
             'roles', function($q){
-                $q->where('name', 'manager');
+                $q->where('name', 'employee');
             }
         )->get();
         $category = Category::whereIn('service_id', $invoice->services)->where('status', 1)->get();

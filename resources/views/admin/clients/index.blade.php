@@ -87,7 +87,7 @@
                               <!-- Modal -->
                               @permission('register-client')
                               <div class="modal fade top-30" id="passwordGenerate_{{$client->id}}" tabindex="-1" role="dialog" aria-labelledby="passwordGenerate_{{$client->id}}Label" aria-hidden="true">
-                                <form action="{{url($client->id .'/clientregister')}}" method="post">
+                                <form action="{{url('clientregister/' .$client->id)}}" method="post">
                                     @csrf
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">

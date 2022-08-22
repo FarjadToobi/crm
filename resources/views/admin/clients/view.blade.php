@@ -30,27 +30,31 @@
             </div>
         </div>
 
+        @foreach ($clientpaid as $cpi)
         <div class="col-md-2 col-sm-6">
-            <!-- DataTales Example -->
             <div class="card shadow">
-                <div class="card-body text-center lead text-info">              
+                <div class="card-body text-center lead text-info">
                     <i class="fa fa-desktop mb-3"></i>
                     <p class="text-black">Paid Invoices</p>      
-                    <h4>$0 </h4>
+                    <h4>{{ $cpi->currencies->sign . $cpi->amount }}</h4>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-2 col-sm-6">
-            <!-- DataTales Example -->
-            <div class="card shadow">
-                <div class="card-body text-center lead text-info">              
-                    <i class="fa fa-desktop mb-3"></i>
-                    <p class="text-black">Paid Invoices</p>
-                    <h4>$0</h4>
+        @endforeach
+
+        @foreach ($clientunpaid as $cupi)
+            <div class="col-md-2 col-sm-6">
+                <div class="card shadow">
+                    <div class="card-body text-center lead text-info">
+                        <i class="fa fa-desktop mb-3"></i>
+                        <p class="text-black">UnPaid Invoices</p>      
+                        <h4>{{ $cupi->currencies->sign . $cupi->amount }}</h4>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+
+  
     </div>
 
     <div class="row mt-4">
@@ -89,8 +93,8 @@
                         </tfoot>
 
                         
-                        <tbody>       
-                            @foreach ($client->leads as $lead)
+                        <tbody>  
+                            @forelse ($client->leads as $lead)
                                 <tr>
                                     <td><div class="btn btn-info"># {{ $lead->invoice_number}}</div></td>
                                     <td>{{ $lead->name }}</td>
@@ -99,11 +103,17 @@
                                     <td>{{$client->brand->name}}</td>
                                     <td>{{ $lead->currencies->sign . $lead->amount }}</td>
                                     <td>
-                                        <button class="btn btn-{{ $lead->payment_status == '1' ? 'success' : 'danger' }} ">{{ $lead->payment_status == '1' ? 'Paid' : 'UnPaid' }} </button>
-                                        </td>
-                                    <td><a href="{{route('lead.show', $lead->id)}}" class="btn btn-secondary"><i class="fa fa-eye"></i> View</a></td>
+                                        <a href="{{ url('leadstaatus/'.$lead->id.'/'.$lead->payment_status) }}" class="btn btn-{{ $lead->payment_status == '1' ? 'success' : 'danger' }} ">{{ $lead->payment_status == '1' ? 'Paid' : 'UnPaid' }} </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('lead.show', $lead->id)}}" class="btn btn-secondary"><i class="fa fa-eye"></i> View</a>
+                                    </td>
                                 </tr>
-                            @endforeach                                                              
+                                @empty
+                                <tr colspan="5">
+                                    <td>No Data Found</td>
+                                </tr>
+                            @endforelse                                                              
                         </tbody>
                     </table>
                 </div>

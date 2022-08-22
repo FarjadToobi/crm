@@ -175,4 +175,22 @@ class InvoicesController extends Controller
     {
         //
     }
+
+    
+    public function leadstatus($id, $status){
+        try {
+            if($status == '1'){
+                $status = '0';
+            }
+            else{
+                $status = '1';
+            }
+            $invoices = Invoices::find($id);
+            $invoices->payment_status = $status;
+            $invoices->save();
+            return back()->with('success', "Update successfully");
+        } catch (\Exception $e) {
+            return back()->with('error', json_encode($e->getMessage()));
+        }
+    }
 }

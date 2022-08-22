@@ -16,8 +16,8 @@
         <div class="card-body">
             @foreach ($messages as $m)
                 <div class="row">
-                    <div class="col-md-7 {{ $m->reciver_id == Auth::user()->id ? 'offset-md-5' : '' }}">
-                        <div class="alert alert-{{ $m->reciver_id == Auth::user()->id ? 'primary' : 'success' }}">
+                    <div class="col-md-7 {{ $m->receiver_id == Auth::user()->id ? 'offset-md-5' : '' }}">
+                        <div class="alert alert-{{ $m->receiver_id == Auth::user()->id ? 'primary' : 'success' }}">
                             {!! $m->message !!}
                             <div>
                                 
@@ -38,7 +38,7 @@
 
     <!-- Modal -->
     <div class="modal fade top-30" id="write_message" tabindex="-1" role="dialog" aria-labelledby="write_messageLabel" aria-hidden="true">
-        <form action="{{route('chats.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('messages.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
