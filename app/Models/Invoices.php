@@ -14,6 +14,25 @@ use Illuminate\Database\Eloquent\Model;
 class Invoices extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'email',
+        'contact',
+        'brand',
+        'service',
+        'package',
+        'currency',
+        'client_id',
+        'invoice_number',
+        'invoice_date',
+        'sales_agent_id',
+        'description',
+        'amount',
+        'payment_status',
+        'payment_type',
+        'custom_package',
+        'transaction_id'
+    ];
 
     public function user()
     {

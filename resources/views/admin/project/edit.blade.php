@@ -14,16 +14,13 @@
             <div class="card-body">
                 <div class="form-row">
                     <input name="cost" type="hidden" value="{{  $project->cost }}" readonly/>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <x-select name="client" label="Client" :collection="$clients" :selected="$project->client_id"/>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <x-select name="category[]" label="Category" :collection="$category" multiple="multiple"/>
                     </div>
                     
-                    <div class="col-md-4">
-                        <x-select name="assign_id" label="Assign To" :collection="$users" :selected="$project->assign_id" />
-                    </div>
 
                     
                     

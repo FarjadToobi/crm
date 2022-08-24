@@ -101,14 +101,14 @@
             {{-- @endrole --}}
 
             {{-- @role('admin') --}}
-            @permission('messages-access')
+            {{-- @permission('messages-access') --}}
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('messages.index') }}">
+                <a class="nav-link" href="{{ url('/messages') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Messages</span></a>
             </li>
-            @endpermission
+            {{-- @endpermission --}}
 
 
             <!-- Nav Item - Tables -->

@@ -2,10 +2,10 @@
 
 
 @section('content')
-    <x-header title="Edit User" description="lorem ipsum" />
+    <x-header title="Create User" description="" />
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">User Create</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Create User</h6>
             <a href="{{ route('laratrust.roles-assignment.index') }}" class="btn btn-info"><i
                     class="fa fa-arrow-circle-left"></i> Back</a>
         </div>

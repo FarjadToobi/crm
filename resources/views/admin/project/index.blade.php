@@ -18,7 +18,6 @@
                             <th>User Name</th>
                             <th>Brand</th>
                             <th>Amount</th>
-                            <th>Assign To</th>
                             <th>Status</th>
                             @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project', 'show-brief']))
                                 <th>Action</th>
@@ -32,7 +31,6 @@
                             <th>User Name</th>
                             <th>Brand</th>
                             <th>Amount</th>
-                            <th>Assign To</th>
                             <th>Status</th>
                             @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project', 'show-brief']))
                                 <th>Action</th>
@@ -47,7 +45,6 @@
                                 <td>{{ $project->user->name }}<br /> {{ $project->user->email }}</td>
                                 <td><span class="btn btn-blue">{{ $project->brand->name }}</span></td>
                                 <td>{{ $project->cost }}</td>
-                                <td>{{ isset($project->assign->name) ? $project->assign->name : ''}}</td>
                                 <td><button
                                         class="btn btn-{{ $project->status == '1' ? 'success' : 'danger' }} ">{{ $project->status == '1' ? 'Active' : 'Deactive' }}
                                     </button>

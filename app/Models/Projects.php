@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Projects extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'status', 'product_status', 'user_id', 'cost', 'client_id', 'brand_id', 'assign_id', 'breif_id', 'breif_type'];
+    protected $fillable = ['name', 'description', 'status', 'product_status', 'user_id', 'cost', 'client_id', 'brand_id', 'breif_id', 'breif_type'];
 
     public function brand()
     {
@@ -23,12 +23,6 @@ class Projects extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
-
-    public function assign()
-    {
-        return $this->hasOne(User::class, 'id', 'assign_id');
     }
 
     

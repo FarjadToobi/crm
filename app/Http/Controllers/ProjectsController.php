@@ -28,7 +28,7 @@ class ProjectsController extends Controller
             $projects = Projects::all();            
         }
         else if(Auth()->user()->hasRole('employee')){
-            $projects = Projects::whereIn('assign_id', Auth()->user())->where('status', '=', '1')->get();            
+            $projects = Projects::where('status', '=', '1')->get();            
         }
         else{
             $projects = Projects::whereIn('brand_id', Auth()->user()->brand_list())->get();

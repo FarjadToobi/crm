@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('brand', BrandsController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('package', PackagesController::class);
-    Route::resource('messages', MessagesController::class);
+    // Route::resource('messages', MessagesController::class);
     Route::resource('user', UserController::class);
     Route::resource('logobreif', LogoBreifController::class);
     Route::resource('webbreif', WebBreifController::class);

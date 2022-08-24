@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<x-header title="Users" description="lorem ipsum" />
+<x-header title="Permissions" description="" />
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Permission List</h6>
             <a href="{{route('laratrust.permissions.create')}}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Create</a>
         </div>
         <div class="card-body">

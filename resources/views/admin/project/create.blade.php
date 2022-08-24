@@ -19,16 +19,12 @@
                     <input name="client" type="hidden"  value="{{ $invoice->clients->id }}" readonly/>
                     <input name="breif_id" type="hidden"  value="{{ $id }}" readonly/>
                     <input name="breif_type" type="hidden"  value="{{ $name }}" readonly/>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <x-input name="client_name" label="Client" type="text" value="{{ $invoice->user->name }}" readonly/>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <x-select name="category[]" label="Category" :collection="$category" multiple="multiple"/>
                     </div>
-                    <div class="col-md-4">
-                        <x-select name="assign_id" label="Assign To" :collection="$users"  />
-                    </div>
-                    
                     
                     <div class="col-md-6">
                         <x-input name="name" label="Name" type="text" value="{{ old('name') }}" placeholder="Name" />
