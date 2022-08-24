@@ -16,7 +16,7 @@
                 @csrf
                 <div class="form-row">
                     <input name="cost" type="hidden" value="{{  $invoice->currencies->sign . $invoice->amount }}" readonly/>
-                    <input name="client" type="hidden"  value="{{ $invoice->user->id }}" readonly/>
+                    <input name="client" type="hidden"  value="{{ $invoice->clients->id }}" readonly/>
                     <input name="breif_id" type="hidden"  value="{{ $id }}" readonly/>
                     <input name="breif_type" type="hidden"  value="{{ $name }}" readonly/>
                     <div class="col-md-4">

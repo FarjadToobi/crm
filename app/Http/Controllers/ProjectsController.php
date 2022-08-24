@@ -27,7 +27,7 @@ class ProjectsController extends Controller
         if(Auth()->user()->hasRole('admin')){
             $projects = Projects::all();            
         }
-        else if(Auth()->user()->hasRole('manager')){
+        else if(Auth()->user()->hasRole('employee')){
             $projects = Projects::whereIn('assign_id', Auth()->user())->where('status', '=', '1')->get();            
         }
         else{
@@ -77,7 +77,7 @@ class ProjectsController extends Controller
             'status' => 'required',
             'category' => 'required',
         ]);
-        $get_client = Clients::where('id', $request->input('client'))->first();
+        $get_client = Clients::where('id', '=', $request->input('client'))->first();
         $request->request->add(['brand_id' => $get_client->brand->id]);
         $request->request->add(['client_id' => $request->input('client')]);
         $request->request->add(['user_id' => auth()->user()->id]);

@@ -20,7 +20,7 @@
                             <th>Amount</th>
                             <th>Assign To</th>
                             <th>Status</th>
-                            @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project']))
+                            @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -34,7 +34,7 @@
                             <th>Amount</th>
                             <th>Assign To</th>
                             <th>Status</th>
-                            @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project']))
+                            @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -52,15 +52,17 @@
                                         class="btn btn-{{ $project->status == '1' ? 'success' : 'danger' }} ">{{ $project->status == '1' ? 'Active' : 'Deactive' }}
                                     </button>
                                 </td>
-                                @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project']))
+                                @if (Auth::user()->hasPermission(['messages-access', 'create-task', 'edit-project', 'show-brief']))
                                     <td>
                                         @permission('messages-access')
                                             <a href="{{ route('messages.show', $project->client_id) }}" class="btn btn-white"><i
                                                     class="fas fa-comment"></i> Messages</a>
                                         @endpermission
 
+                                        @permission('show-brief')
                                         <a href="{{ route("$project->breif_type.show", $project->breif_id) }}" class="btn btn-info"><i
-                                            class="fas fa-copy"></i> View Form</a>
+                                            class="fas fa-copy"></i> View Brief</a>
+                                        @endpermission
 
                                         @permission('create-task')
                                             <a href="{{ url('taskproject/' . $project->id) }}" class="btn btn-dark"><i

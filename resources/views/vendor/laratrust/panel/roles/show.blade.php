@@ -1,4 +1,4 @@
-@extends('laratrust::panel.layout')
+@extends('layouts.app')
 
 @section('title', "Role details")
 

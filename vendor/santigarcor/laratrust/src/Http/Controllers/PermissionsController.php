@@ -71,4 +71,5 @@ class PermissionsController
         Session::flash('laratrust-success', 'Permission updated successfully');
         return redirect(route('laratrust.permissions.index'));
     }
+
 }

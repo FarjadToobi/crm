@@ -1,4 +1,4 @@
-@extends('laratrust::panel.layout')
+@extends('layouts.app')
 
 
 @section('content')
@@ -42,25 +42,16 @@
             <x-text-area name="description" label="Description"  placeholder="Some description for the {{$type}}">{{$model->description ?? old('description')}}</x-text-area>
           </div>
           @if($type == 'role')
-          <div class="col-md-12 mb-3">
-            <span class="block text-gray-700 mt-4">Permissions</span>
-            <div class="row">
-              @foreach ($permissions as $permission)
-                  <div class="col-md-3 mx-4">
-                    <input
-                    type="checkbox"
-                    class="form-check-input"
-                    name="permissions[]"
-                    value="{{$permission->getKey()}}"
-                    {!! $permission->assigned ? 'checked' : '' !!}
-                    id="permission_{{$permission->getKey()}}"
-                  >
-                  <label class="form-check-label mr-5" for="permission_{{$permission->getKey()}}">
-                    <span class="ml-2">{{$permission->display_name ?? $permission->name}}</span>
-                  </label>
-                  </div>
-              @endforeach
-            </div>
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label for="permission" class="form-label">Permissions</label>
+              <select class="form-control @error('permissions') is-invalid @enderror" id="permissions"
+                  name="permissions[]" autofocus=""  multiple="multiple">
+                  @foreach ($permissions as $permission)
+                      <option value="{{ $permission->getKey() }}" {{ $permission->assigned == $permission->getKey() ? "selected" : " " }}>{{$permission->display_name ?? $permission->name}}</option>
+                  @endforeach
+              </select>
+          </div>
           </div>
         @endif
         </div>

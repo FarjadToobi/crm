@@ -1,4 +1,4 @@
-@extends('laratrust::panel.layout')
+@extends('layouts.app')
 @section('content')
 <x-header title="Users" description="lorem ipsum" />
     <!-- DataTales Example -->

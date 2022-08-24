@@ -22,7 +22,7 @@
                             <th>Client</th>
                             <th>Agent</th>
                             <th>Files</th>
-                            @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
+                            @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -36,7 +36,7 @@
                             <th>Client</th>
                             <th>Agent</th>
                             <th>Files</th>
-                            @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
+                            @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -60,18 +60,18 @@
                                         1 --}}
                                     @endif   
                                 </td>
-                                @if (Auth::user()->hasPermission(['edit-webbreif', 'show-webbreif']))
+                                @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                     <td>
                                         @permission('project-assign')
                                             <a href="{{ url("create/webbreif/$breif->id")}}" class="btn btn-info">
                                                 <i class="fa fa-user"></i> Assign
                                             </a>
                                         @endpermission    
-                                        @permission('edit-webbreif')
+                                        {{-- @permission('edit-brief')
                                             <a href="{{ route('webbreif.edit', $breif->id) }}" class="btn btn-primary"><i
                                                     class="fas fa-pen"></i> Edit</a>
-                                        @endpermission
-                                        @permission('show-webbreif')
+                                        @endpermission --}}
+                                        @permission('show-brief')
                                             <a href="{{ route('webbreif.show', $breif->id) }}" class="btn btn-dark"><i
                                                     class="fas fa-eye"></i> View</a>
                                         @endpermission

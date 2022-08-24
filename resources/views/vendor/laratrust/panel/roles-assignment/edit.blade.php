@@ -1,4 +1,4 @@
-@extends('laratrust::panel.layout')
+@extends('layouts.app')
 
 
 @section('content')
@@ -28,43 +28,38 @@
                         <x-select name="role" label="Role" :collection="$roles" />
                     </div> --}}
 
+
                     
-                    <div class="col-md-12">
-                        <span class="block text-gray-700 mt-4">Categories</span>
-                        <div class="form-check">
-                            
-                            @foreach ($categories as $key => $category)
-                                <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->id }}"
-                                    id="category_{{ $category->id }}"  
-                                    @if (count($user->category->pluck('id')) > 0))
-                                        @foreach ($user->category->pluck('id') as $checkcategory)
-                                        {{ $checkcategory == $category->id ? 'checked' : '' }}
-                                        @endforeach
-                                    @endif    
-                                    >
-                                <label class="form-check-label mr-5" for="category_{{ $category->id }}">
-                                    <span class="ml-2">
-                                        {{ $category->name }}
-                                    </span>
-                                </label>
-                            @endforeach
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-control @error('category') is-invalid @enderror" id="category"
+                                name="category[]" autofocus=""  multiple="multiple">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" 
+                                        @if (count($user->category->pluck('id')) > 0))
+                                            @foreach ($user->category->pluck('id') as $checkcategory)
+                                            {{ $checkcategory == $category->id ? 'checked' : '' }}
+                                            @endforeach
+                                        @endif    
+                                        >{{$category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col-md-12 mb-4">
-                        <span class="block text-gray-700 mt-4">Roles</span>
-                        <div class="form-check">
-                            @foreach ($roles as $role)
-                                <input type="checkbox" class="form-check-input" name="roles[]" value="{{ $role->getKey() }}"
-                                    {!! $role->assigned ? 'checked' : '' !!} id="role_{{ $role->getKey() }}">
-                                <label class="form-check-label mr-5" for="role_{{ $role->getKey() }}">
-                                    <span class="ml-2 {!! $role->assigned && !$role->isRemovable ? 'text-gray-600' : '' !!}">
-                                        {{ $role->display_name ?? $role->name }}
-                                    </span>
-                                </label>
-                            @endforeach
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="roles" class="form-label">Roles</label>
+                            <select class="form-control @error('category') is-invalid @enderror" id="category"
+                                name="roles[]" autofocus=""  multiple="multiple">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->getKey() }}" {!! $role->assigned ? 'selected' : '' !!}  >{{$role->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
+
                     {{-- @if ($permissions)
                 <div class="col-md-12 mb-3">
                   <span class="block text-gray-700 mt-4">Permissions</span>

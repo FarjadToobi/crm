@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-header title="Brefis" description="lorem ipsum" />
+    <x-header title="All Logo Brief" description="" />
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Brefis Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Briefs</h6>
             @role('client')
                 <a href="{{ route('breif.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Add New</a>
             @endrole
@@ -21,7 +21,7 @@
                             <th>Client</th>
                             <th>Agent</th>
                             <th>Brand</th>
-                            @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
+                            @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -34,7 +34,7 @@
                             <th>Client</th>
                             <th>Agent</th>
                             <th>Brand</th>
-                            @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
+                            @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -48,18 +48,18 @@
                                 <td>{{ $breif->agent->name }}<br>{{$breif->agent->email}}</td>
                                 <td>{{ $breif->client->name }}<br>{{$breif->client->email}}</td>
                                 <td><span class="btn btn-blue">{{ $breif->brand->name }}</span></td>
-                                @if (Auth::user()->hasPermission(['edit-logobreif', 'show-logobreif']))
+                                @if (Auth::user()->hasPermission(['edit-brief', 'show-brief']))
                                     <td>                                        
                                         @permission('project-assign')
                                             <a href="{{ url("create/logobreif/$breif->id")}}" class="btn btn-info">
                                                 <i class="fa fa-user"></i> Assign
                                             </a>
                                         @endpermission                                        
-                                        @permission('edit-logobreif')
+                                        {{-- @permission('edit-brief')
                                             <a href="{{ route('logobreif.edit', $breif->id) }}" class="btn btn-primary"><i
                                                     class="fas fa-pen"></i> Edit</a>
-                                        @endpermission
-                                        @permission('show-logobreif')
+                                        @endpermission --}}
+                                        @permission('show-brief')
                                             <a href="{{ route('logobreif.show', $breif->id) }}" class="btn btn-dark"><i
                                                     class="fas fa-eye"></i> View</a>
                                         @endpermission

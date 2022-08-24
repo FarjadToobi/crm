@@ -132,7 +132,7 @@
 
             {{-- @permission('breif-access') --}}
             <!-- Nav Item - Utilities Collapse Menu -->
-            @if (Auth::user()->hasPermission(['logobreif-access', 'webbreif-access']))
+            @if (Auth::user()->hasPermission(['brief-access']))
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -143,12 +143,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Project Breif:</h6>
-                        @permission('logobreif-access')
-                            <a class="collapse-item" href="{{ route('logobreif.index') }}">Logo</a>
-                        @endpermission
-                        @permission('webbreif-access')
-                            <a class="collapse-item" href="{{ route('webbreif.index') }}">Web</a>
-                        @endpermission
+                        <a class="collapse-item" href="{{ route('logobreif.index') }}">Logo</a>
+                        <a class="collapse-item" href="{{ route('webbreif.index') }}">Web</a>
                     </div>
                 </div>
             </li>
@@ -156,12 +152,21 @@
             {{-- @endpermission --}}
 
 
-            @permission('add-breif')
+            @permission('add-logobrief')
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('breif.index') }}">
+                    <a class="nav-link" href="{{ route('logobreif.create') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Add Breif</span></a>
+                        <span>Add Logo Breif</span></a>
+                </li>
+            @endpermission
+
+            @permission('add-webbrief')
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('webbreif.create') }}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Add Web Breif</span></a>
                 </li>
             @endpermission
 

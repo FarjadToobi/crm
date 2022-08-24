@@ -1,4 +1,4 @@
-@extends('laratrust::panel.layout')
+@extends('layouts.app')
 
 
 @section('content')
@@ -35,33 +35,12 @@
                 <x-select name="role" label="Role" :collection="$roles"  />
               </div> --}}
 
-                    <div class="col-md-12">
-                        <span class="block text-gray-700 mt-4">Categories</span>
-                        <div class="form-check">
-                            @foreach ($categories as $category)
-                                <input type="checkbox" class="form-check-input" name="category[]" value="{{ $category->id }}"
-                                    id="category_{{ $category->id }}">
-                                <label class="form-check-label mr-5" for="category_{{ $category->id }}">
-                                    <span class="ml-2">
-                                        {{ $category->name }}
-                                    </span>
-                                </label>
-                            @endforeach
-                        </div>
+                    <div class="col-md-6">
+                        <x-select name="category[]" label="Categories" :collection="$categories" multiple="multiple" />
                     </div>
-                    <div class="col-md-12 mb-4">
-                        <span class="block text-gray-700 mt-4">Roles</span>
-                        <div class="form-check">
-                            @foreach ($roles as $role)
-                                <input type="checkbox" class="form-check-input" name="roles[]" value="{{ $role->getKey() }}"
-                                    {!! $role->assigned ? 'checked' : '' !!} id="role_{{ $role->getKey() }}">
-                                <label class="form-check-label mr-5" for="role_{{ $role->getKey() }}">
-                                    <span class="ml-2 {!! $role->assigned && !$role->isRemovable ? 'text-gray-600' : '' !!}">
-                                        {{ $role->display_name ?? $role->name }}
-                                    </span>
-                                </label>
-                            @endforeach
-                        </div>
+                    
+                    <div class="col-md-6">
+                        <x-select name="roles[]" label="Roles" :collection="$roles"  />
                     </div>
 
                     {{-- @if ($permissions)
