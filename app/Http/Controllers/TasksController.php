@@ -93,6 +93,12 @@ class TasksController extends Controller
             $projectCategory->project_id = $task->project_id;
             $projectCategory->category_id = $task->category_id;
 
+            
+            $this->notify([
+                'id' => $task->id,
+                'message' => "new project"
+            ]);
+            
             if ($request->file('files')) {
                 $files = [];
                 foreach ($request->file('files') as $key => $file) {
@@ -126,11 +132,15 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $notify)
     {
         //
         if (!Auth::user()->hasPermission('view-task')) abort(403);
 
+        if($notify){
+            auth()->user()->notifications->where('id',$notify)->markAsRead();
+        }
+    
         $task = Tasks::find($id);
         return view('admin.tasks.view', compact('task'));
     }

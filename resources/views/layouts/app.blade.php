@@ -182,7 +182,17 @@
             });
         });
 
-        
+        $(".notification").on("click", function(){
+            var id = $(this).data("id");
+            $.ajax({
+                type:'GET',
+                url:'/markread/' + id,    
+                success: function (data){
+                    $(this).children().closest("span").removeClass( "font-weight-bold" );
+                }             
+            });
+        });
+         
     </script>
 </body>
 

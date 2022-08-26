@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class LeadGenerate extends Mailable
+class MailTemplate extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,12 @@ class LeadGenerate extends Mailable
      *
      * @return void
      */
-    public $details; 
-    public function __construct($details)
+        
+    public $mailmessage; 
+    public function __construct($mailmessage)
     {
         //
-        $this->details = $details;
+        $this->mailmessage = $mailmessage;
     }
 
     /**
@@ -30,6 +31,6 @@ class LeadGenerate extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.leadgenerate-mail');
+        return $this->markdown('emails.sendMailComponent');
     }
 }

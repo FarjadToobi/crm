@@ -10,6 +10,7 @@ use App\Models\Packages;
 use App\Models\Services;
 use App\Models\Currencies;
 use App\Models\Invoices;
+use App\Mail\MailTemplate;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -29,8 +30,7 @@ class ClientsController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('client-access')) abort(403);
-        // abort_if(Gate::denies('show-client'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $clients = Clients::all();
+        $clients = Clients::all();        
         return view('admin.clients.index', compact('clients'));
     }
 
@@ -67,14 +67,15 @@ class ClientsController extends Controller
         ]);
 
         try {
-            $clients = new Clients;
-            $clients->name = $request->first_name;
-            $clients->last_name = $request->last_name;
-            $clients->contact = $request->contact;
-            $clients->email = $request->email;
-            $clients->brand_id = $request->brand;
-            $clients->status = $request->status;
-            $clients->save();
+            $client = new Clients;
+            $client->name = $request->first_name;
+            $client->last_name = $request->last_name;
+            $client->contact = $request->contact;
+            $client->email = $request->email;
+            $client->brand_id = $request->brand;
+            $client->status = $request->status;
+            $client->save();
+            
             return back()->with('success', "Insert successfully");
         } catch (\Exception $e) {
             return back()->with('error', json_encode($e->getMessage()));
@@ -142,6 +143,9 @@ class ClientsController extends Controller
             $clients->brand_id = $request->brand;
             $clients->status = $request->status;
             $clients->save();
+            
+            $this->notify($request->first_name . $request->last_name . " updated");
+            
             return back()->with('success', "Update successfully");
         } catch (\Exception $e) {
             return back()->with('error', json_encode($e->getMessage()));
@@ -179,6 +183,13 @@ class ClientsController extends Controller
                 $user->save();
 
                 $user->attachRole('client');
+
+                Mail::to($client->email)->send(new MailTemplate("
+                Hello!
+                Welcome to ".env("APP_NAME")." - ".$client->name." 
+                You are one step closer to making your business more organized 
+                Your registered email-id is ".$client->email." you can now login in our portal
+                If you have any questions do not hesitate to reach out at ".env("APP_EMAILss")));
 
                 return back()->with('success', "Client Password Inserted");
             }

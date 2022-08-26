@@ -9,7 +9,7 @@ use App\Models\Clients;
 use App\Models\Packages;
 use App\Models\Services;
 use App\Models\Projects;
-use App\Mail\LeadGenerate;
+use App\Mail\MailTemplate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -68,24 +68,29 @@ class InvoicesController extends Controller
             // Mail::to($request['email'])->send(new WelcomeMail());
             // Mail::to('demosites2244@gmail.com')->send(new WelcomeMail());
             $details = [
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'contact' => $request['contact'],
-                'brand' => $request['brand_id'],
-                'service' => $request['service'],
-                'package' => $request['packages'],
-                'currency' => $request['currency'],
-                'client_id' => $request['client_id'],
+                'name' => $request->name,
+                'email' => $request->email,
+                'contact' => $request->contact,
+                'brand' => $request->brand_id,
+                'service' => $request->service,
+                'package' => $request->packages,
+                'currency' => $request->currency,
+                'client_id' => $request->client_id,
                 'invoice_number' =>  rand(999, 10000000),
                 'sales_agent_id' =>  Auth::id(),
-                'description' => $request['description'],
-                'amount' => $request['amount'],
-                'payment_type' => $request['payment_type'],
-                'custom_package' => $request['package_name']
+                'description' => $request->description,
+                'amount' => $request->amount,
+                'payment_type' => $request->payment_type,
+                'custom_package' => $request->package_name
             ];
             $invoice = Invoices::create($details);
 
-            Mail::to($request['email'])->send(new LeadGenerate($details));
+            Mail::to($request['email'])->send(new MailTemplate("
+            Hello! 
+            Welcome to ".env("APP_NAME")." - ".$request->name." 
+            Invoice is generated successfully.
+            invoice no# " .$request->invoice_number."
+            If you have any questions do not hesitate to reach out at ".env("APP_EMAIL")));
             
             return back()->with('success', "Insert successfully");
         } catch (\Exception $e) {

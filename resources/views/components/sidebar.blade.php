@@ -13,13 +13,14 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            @permission('dashboard-access')
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            @endpermission
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -105,7 +106,7 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/messages') }}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-comment"></i>
                     <span>Messages</span></a>
             </li>
             {{-- @endpermission --}}
@@ -115,7 +116,7 @@
             @permission('client-access')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('clients.index') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-user"></i>
                         <span>Clients</span></a>
                 </li>
             @endpermission
@@ -125,7 +126,7 @@
             @permission('lead-access')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lead.index') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-money-bill-wave"></i>
                         <span>Invoices</span></a>
                 </li>
             @endpermission
@@ -136,7 +137,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-pager"></i>
                     <span>Breif</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -156,7 +157,7 @@
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logobreif.create') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-pen"></i>
                         <span>Add Logo Breif</span></a>
                 </li>
             @endpermission
@@ -165,7 +166,7 @@
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('webbreif.create') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-pen"></i>
                         <span>Add Web Breif</span></a>
                 </li>
             @endpermission
@@ -174,7 +175,7 @@
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('project.index') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-project-diagram"></i>
                         <span>Projects</span></a>
                 </li>
             @endpermission
@@ -184,7 +185,7 @@
             @permission('task-access')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('task.index') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-list"></i>
                         <span>Task</span></a>
                 </li>
             @endpermission
@@ -225,7 +226,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSetting"
                     aria-expanded="true" aria-controls="collapseSetting">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-sliders-h"></i>
                     <span>Setting</span>
                 </a>
                 <div id="collapseSetting" class="collapse" aria-labelledby="headingGeneral"

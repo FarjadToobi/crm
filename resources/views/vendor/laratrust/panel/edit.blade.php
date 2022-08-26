@@ -23,7 +23,7 @@
           <div class="col-md-6">
             <div class="mb-3">
               <label for="display_name" class="form-label">Name/Code</label>
-              <input class="form-control @error('name') is-invalid @enderror" name="name" placeholder="this-will-be-the-code-name" :value="name" readonly autocomplete="off" />
+              <input class="form-control @error('name') is-invalid @enderror" name="name" placeholder="this-will-be-the-code-name" :value="name"  autocomplete="off" />
               @error('name')
                   <div class="alert alert-danger">{{ $message}} </div>
               @enderror
