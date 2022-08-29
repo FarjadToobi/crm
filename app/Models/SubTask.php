@@ -9,11 +9,11 @@ class SubTask extends Model
 {
     use HasFactory;
     protected $table = "sub_task";
-    protected $fillable = ['task_id', 'description', 'user_id', 'duedate'];
+    protected $fillable = ['task_id', 'description', 'user_id', 'assign_id', 'duedate'];
 
     public function user()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'assign_id');
     }
 
     public function task()

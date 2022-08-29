@@ -3,7 +3,7 @@
 
 @section('content')
 
-<x-header title="Generate Payment Link" description="lorem ipsum" />
+{{-- <x-header title="Generate Payment Link" description="lorem ipsum" /> --}}
     <div class="row">
         <div class="col-md-12">
             <!-- DataTales Example -->

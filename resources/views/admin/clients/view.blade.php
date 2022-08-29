@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Page Heading -->
-    <x-header title="View Client Info" description="lorem ipsum" />
+    {{-- <x-header title="View Client Info" description="lorem ipsum" /> --}}
     <div class="row">
         <div class="col-md-6">
             <!-- DataTales Example -->
@@ -63,6 +63,7 @@
             <div class="card shadow">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold text-primary">Invoices</h6>
+                    <a class="btn btn-success" href="{{ url('file-export/'.$client->id) }}">Excel</a>
                 </div>
                 <div class="card-body">              
                     <table class="table table-bordered" width="100%" cellspacing="0">

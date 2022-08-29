@@ -19,7 +19,13 @@ class SubtaskController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('subtask-access')) abort(403);
-        $subtasks = Subtask::all();
+        if(Auth()->user()->hasRole('team-lead') || Auth()->user()->hasRole('employee')){
+            $subtasks = Subtask::where('assign_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->get();
+        }
+        else{
+            $subtasks = Subtask::all();
+        }
+        
         return view('admin.subtask.index', compact('subtasks'));
     }
 
@@ -33,9 +39,14 @@ class SubtaskController extends Controller
         //
         if (!Auth::user()->hasPermission('create-subtask')) abort(403);
         $task = Tasks::find($id);
+        $category = $task->category->name;
         $users = User::whereHas(
             'roles', function($q){
                 $q->where('name', 'employee');
+            }
+        )->whereHas(
+            'category', function($q) use ($category){
+                $q->where('name', $category);
             }
         )->get();
         
@@ -51,18 +62,25 @@ class SubtaskController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
         $request->validate([
             'due_date' => 'required',
             'description' => 'required',
         ]);
 
-        SubTask::create([
-            'task_id' => $request->task,
-            'duedate' => $request->due_date,
-            'user_id' => $request->user,
-            'description' => $request->description,
-        ]);
-        return back()->with('success', "Insert successfully");
+        try{
+            SubTask::create([
+                'task_id' => $request->task,
+                'duedate' => $request->due_date,
+                'user_id' => auth()->user()->id,
+                'assign_id' => $request->user,
+                'description' => $request->description,
+            ]);
+            return back()->with('success', "Insert successfully");
+        }
+        catch (Exception $ex){
+            return back()->with('error', "Internal Server Error");
+        }
     }
 
     /**
@@ -87,9 +105,15 @@ class SubtaskController extends Controller
         //
         if (!Auth::user()->hasPermission('edit-subtask')) abort(403);
         $subtask = SubTask::find($id);
+        $task = Tasks::find($subtask->task_id);
+        $category = $task->category->name;
         $users = User::whereHas(
             'roles', function($q){
                 $q->where('name', 'employee');
+            }
+        )->whereHas(
+            'category', function($q) use ($category){
+                $q->where('name', $category);
             }
         )->get();
         return view('admin.subtask.edit', compact('users', 'subtask'));
@@ -108,7 +132,8 @@ class SubtaskController extends Controller
         try{
             $subtask = SubTask::find($id);
             $subtask->description = $request->description;
-            $subtask->user_id = $request->user;
+            $subtask->assign_id = $request->user;
+            $subtask->user_id = auth()->user()->id;
             $subtask->duedate = $request->due_date;
             
             $subtask->save();

@@ -8,7 +8,6 @@ use App\Models\Projects;
 use App\Models\ProjectCategory;
 use App\Models\ClientFiles;
 use Illuminate\Http\Request;
-// use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
@@ -22,8 +21,8 @@ class TasksController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('task-access')) abort(403);
-        if(Auth()->user()->hasRole('admin')){
-            $tasks = Tasks::all();
+        if(Auth()->user()->hasRole('team-lead') || Auth()->user()->hasRole('employee')){
+            $tasks = Tasks::whereIn('category_id', auth()->user()->category_list())->get();
         }
         else{
             $tasks = Tasks::all();
@@ -67,7 +66,6 @@ class TasksController extends Controller
         // 
         $request->validate([
             'project_id' => 'required',
-            // 'brand_id' => 'required',
             'category' => 'required',
             'due_date' => 'required',
         ]);
@@ -96,7 +94,7 @@ class TasksController extends Controller
             
             $this->notify([
                 'id' => $task->id,
-                'message' => "new project"
+                'message' => "new task created"
             ]);
             
             if ($request->file('files')) {
@@ -132,19 +130,20 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $notify)
+    public function show($id)
     {
         //
         if (!Auth::user()->hasPermission('view-task')) abort(403);
-
-        if($notify){
-            auth()->user()->notifications->where('id',$notify)->markAsRead();
-        }
-    
         $task = Tasks::find($id);
         return view('admin.tasks.view', compact('task'));
     }
 
+    public function tasknotify($id, $notify){
+        if($notify){
+            auth()->user()->notifications->where('id',$notify)->markAsRead();
+        }
+        return $this->show($id);
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -2,10 +2,10 @@
 
 
 @section('content')
-    <x-header title="Edit Task" description="lorem ipsum" />
+    {{-- <x-header title="Edit Task" description="lorem ipsum" /> --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Task Form</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Task</h6>
             <a href="{{ route('subtask.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
         </div>
         <div class="card-body">
@@ -16,7 +16,7 @@
                 <div class="form-row">
 
                     <div class="col-md-6">
-                        <x-select name="user" label="Assign To" :collection="$users" :selected="$subtask->user_id" />
+                        <x-select name="user" label="Assign To" :collection="$users" :selected="$subtask->assign_id" />
                     </div>
                     <div class="col-md-6">
                         <x-input name="due_date" label="Due Date" type="date" value="{{ $subtask->duedate }}" />

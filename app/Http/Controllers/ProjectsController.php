@@ -24,14 +24,16 @@ class ProjectsController extends Controller
     public function index()
     {
         if (!Auth::user()->hasPermission('project-access')) abort(403);
-        if(Auth()->user()->hasRole('admin')){
-            $projects = Projects::all();            
-        }
-        else if(Auth()->user()->hasRole('employee')){
+        // if(Auth()->user()->hasRole('admin')){
+        //     $projects = Projects::all();            
+        // }
+        // else 
+        if(Auth()->user()->hasRole('employee')){
             $projects = Projects::where('status', '=', '1')->get();            
         }
         else{
-            $projects = Projects::whereIn('brand_id', Auth()->user()->brand_list())->get();
+            // $projects = Projects::whereIn('brand_id', Auth()->user()->brand_list())->get();
+                $projects = Projects::all();            
         }
         return view('admin.project.index', compact('projects'));
     }

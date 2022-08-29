@@ -222,7 +222,7 @@
 
             {{-- @permission('manage-user') --}}
             <!-- Nav Item - Utilities Collapse Menu -->
-            @role('admin')
+            @permission('setting-access')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSetting"
                     aria-expanded="true" aria-controls="collapseSetting">
@@ -234,12 +234,15 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Settings</h6>
                         <a class="collapse-item" href="{{ route('laratrust.roles-assignment.index') }}">User</a>
-                        <a class="collapse-item" href="{{ route('laratrust.roles.index') }}">Roles</a>
-                        <a class="collapse-item" href="{{ route('laratrust.permissions.index') }}">Permissions</a>
+
+                        @role('admin')
+                            <a class="collapse-item" href="{{ route('laratrust.roles.index') }}">Roles</a>
+                            <a class="collapse-item" href="{{ route('laratrust.permissions.index') }}">Permissions</a>
+                        @endrole
                     </div>
                 </div>
             </li>
-            @endrole
+            @endpermission
             {{-- @endpermission --}}
 
             {{-- @endrole --}}

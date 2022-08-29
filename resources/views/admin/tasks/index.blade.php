@@ -2,11 +2,11 @@
 
 
 @section('content')
-    <x-header title="Task" description="lorem ipsum" />
+    {{-- <x-header title="Task" description="lorem ipsum" /> --}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Task Table</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Task List</h6>
             @permission('create-task')
                 <a href="{{ route('task.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Create Task</a>
             @endpermission

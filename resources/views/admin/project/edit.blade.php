@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-header title="Project Edit" description="lorem ipsum" />
+    {{-- <x-header title="Project Edit" description="lorem ipsum" /> --}}
 
     <form id="formAuthentication" class="mb-3" action="{{ route('project.update', $project->id) }}" method="POST">
         @csrf

@@ -2,10 +2,10 @@
 
 
 @section('content')
-<x-header title="Edit Package" description="lorem ipsum" />
+{{-- <x-header title="Edit Package" description="lorem ipsum" /> --}}
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">Package Form</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Package</h6>
         <a href="{{ route('package.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
     </div>
     <div class="card-body">

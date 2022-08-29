@@ -36,7 +36,7 @@ class BrandsController extends Controller
         $status = Status::select('id', 'name')->get();
         $users = User::whereHas(
             'roles', function($q){
-                $q->where('name', 'support')->orwhere('name', 'manager');
+                $q->where('name', 'sales-manager')->orwhere('name', 'manager');
             }
         )->get();
         return view('admin.brand.create', compact('status', 'users'));
@@ -103,7 +103,7 @@ class BrandsController extends Controller
         $status = Status::select('id', 'name')->get();
         $users = User::whereHas(
             'roles', function($q){
-                $q->where('name', 'support')->orwhere('name', 'manager');
+                $q->where('name', 'sales-manager')->orwhere('name', 'manager');
             }
         )->get();
         return view('admin.brand.view', compact('brand', 'status', 'users'));
@@ -123,7 +123,7 @@ class BrandsController extends Controller
         $status = Status::select('id', 'name')->get();
         $users = User::whereHas(
             'roles', function($q){
-                $q->where('name', 'support')->orwhere('name', 'manager');
+                $q->where('name', 'sales-manager')->orwhere('name', 'manager');
             }
         )->get();
         return view('admin.brand.edit', compact('brand', 'status', 'users'));

@@ -50,7 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::any('{id}/lead', [App\Http\Controllers\ClientsController::class, 'lead']);
     Route::get('leadstaatus/{id}/{status}', [App\Http\Controllers\InvoicesController::class, 'leadstatus']);
     Route::get('taskproject/{id}', [App\Http\Controllers\TasksController::class, 'taskproject']);
+    Route::get('tasknotify/{id}/{notify}', [App\Http\Controllers\TasksController::class, 'tasknotify']);
     Route::get('subtaskbyid/{id}', [App\Http\Controllers\SubtaskController::class, 'subtaskbyid']);
+
+    Route::get('file-export/{id}', [App\Http\Controllers\ClientsController::class, 'fileExport'])->name('file-export');
 });
 
 

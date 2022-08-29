@@ -2,10 +2,10 @@
 
 
 @section('content')
-<x-header title="Brief of {{$brief->website_title}}" description="" />
+{{-- <x-header title="Brief of {{$brief->website_title}}" description="" /> --}}
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">View Brief</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{$brief->website_title}} Brief</h6>
         {{-- <a href="{{ route('brief.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a> --}}
     </div>
     <div class="card-body">

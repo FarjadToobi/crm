@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-header title="Brefis" description="lorem ipsum" />
+    {{-- <x-header title="Brefis" description="lorem ipsum" /> --}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Brefis Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Websites Briefs List</h6>
             @role('client')
                 <a href="{{ route('breif.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Add New</a>
             @endrole

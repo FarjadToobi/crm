@@ -109,6 +109,7 @@
                     <x-menu></x-menu>
 
                     <div class="container-fluid">
+                        <x-header></x-header>
                         @yield('content')
                     </div>
                 </div>

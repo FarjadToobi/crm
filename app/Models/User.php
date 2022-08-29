@@ -66,4 +66,12 @@ class User extends Authenticatable
         }
         return $brand_id;
     }
+
+    public function category_list(){
+        $category_id = array();
+        foreach ($this->category as $categories){
+            array_push($category_id, $categories->id);
+        }
+        return $category_id;
+    }
 }

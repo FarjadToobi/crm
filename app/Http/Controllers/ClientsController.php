@@ -12,6 +12,8 @@ use App\Models\Currencies;
 use App\Models\Invoices;
 use App\Mail\MailTemplate;
 use Facade\FlareClient\Http\Client;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LeadByClientImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -144,7 +146,6 @@ class ClientsController extends Controller
             $clients->status = $request->status;
             $clients->save();
             
-            $this->notify($request->first_name . $request->last_name . " updated");
             
             return back()->with('success', "Update successfully");
         } catch (\Exception $e) {
@@ -215,5 +216,10 @@ class ClientsController extends Controller
 
         return view('admin.clients.lead', compact('packages', 'currencies', 'services', 'client'));
     }
+
+    public function fileExport($id) 
+    {
+        return Excel::download(new LeadByClientImport($id), 'users-invoices.xlsx');
+    }   
 
 }

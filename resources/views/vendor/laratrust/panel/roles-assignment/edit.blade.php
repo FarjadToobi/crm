@@ -2,10 +2,10 @@
 
 
 @section('content')
-    <x-header title="Edit User" description="lorem ipsum" />
+    {{-- <x-header title="Edit User" description="lorem ipsum" /> --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Roles Assign</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit User</h6>
             <a href="{{ route('laratrust.roles-assignment.index', ['model' => $modelKey]) }}" class="btn btn-info"><i
                     class="fa fa-arrow-circle-left"></i> Back</a>
         </div>
@@ -38,8 +38,8 @@
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" 
                                         @if (count($user->category->pluck('id')) > 0))
-                                            @foreach ($user->category->pluck('id') as $checkcategory)
-                                            {{ $checkcategory == $category->id ? 'checked' : '' }}
+                                            @foreach ($user->category->pluck('id') as $selectcategory)
+                                            {{ $selectcategory == $category->id ? 'selected' : '' }}
                                             @endforeach
                                         @endif    
                                         >{{$category->name }}</option>
@@ -51,7 +51,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="roles" class="form-label">Roles</label>
-                            <select class="form-control @error('category') is-invalid @enderror" id="category"
+                            <select class="form-control @error('roles') is-invalid @enderror" id="roles"
                                 name="roles[]" autofocus=""  multiple="multiple">
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->getKey() }}" {!! $role->assigned ? 'selected' : '' !!}  >{{$role->name }}</option>

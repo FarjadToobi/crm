@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <x-header title="Users" description="" />
+    {{-- <x-header title="Users" description="" /> --}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -18,7 +18,7 @@
                             <th class="th">Id</th>
                             <th class="th">Name</th>
                             <th class="th">Email</th>
-                            <th class="th">Category</th>
+                            {{-- <th class="th">Category</th> --}}
                             <th class="th"># Roles</th>
                             <th class="th">Action</th>
                         </tr>
@@ -29,7 +29,7 @@
                             <th class="th">Id</th>
                             <th class="th">Name</th>
                             <th class="th">Email</th>
-                            <th class="th">Categroy</th>
+                            {{-- <th class="th">Categroy</th> --}}
                             <th class="th"># Roles</th>
                             <th class="th">Action</th>
                         </tr>
@@ -40,11 +40,11 @@
                                 <td>{{ $user->getKey() }}</td>
                                 <td> {{ $user->name ?? 'The model doesn\'t have a `name` attribute' }}</td>
                                 <td> {{ $user->email ?? 'The model doesn\'t have a `email` attribute' }}</td>
-                                <td>
+                                {{-- <td>
                                     @foreach ($user->category->pluck('name') as $category)
                                         <span type="button" class="badge badge-info">{{ $category }}</span>
                                     @endforeach
-                                </td>
+                                </td> --}}
                                 <td>
                                     @foreach ($user->role->pluck('name') as $roles)
                                         {{ $roles }}

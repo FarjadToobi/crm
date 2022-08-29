@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-header title="Edit Clients" description="lorem ipsum" />
+    {{-- <x-header title="Edit Clients" description="lorem ipsum" /> --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Profile</h6>
             <a href="{{ route('profile.index', auth()->user()->id) }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
         </div>
         <div class="card-body">

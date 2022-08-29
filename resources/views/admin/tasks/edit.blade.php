@@ -2,10 +2,10 @@
 
 
 @section('content')
-    <x-header title="Edit Task" description="lorem ipsum" />
+    {{-- <x-header title="Edit Task" description="lorem ipsum" /> --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Task Form</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Task</h6>
             <a href="{{ route('task.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
         </div>
         <div class="card-body">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <x-select name="category" label="Category" :collection="$category" :selection="$task->category_id" />
+                        <x-select name="category" label="Category" :collection="$category" :selected="$task->category_id" />
                     </div>
 
 
@@ -69,7 +69,7 @@
                                 download>Download</a>
                             {{-- </div> --}}
                         @endforeach
-                    </div>
+                    </div>   
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>

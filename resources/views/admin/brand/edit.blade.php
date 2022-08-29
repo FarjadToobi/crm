@@ -2,10 +2,10 @@
 
 
 @section('content')
-<x-header title="Edit Brand" description="lorem ipsum" />
+{{-- <x-header title="Edit Brand" description="lorem ipsum" /> --}}
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">Brand Form</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Brand</h6>
         <a href="{{ route('brand.index') }}" class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
     </div>
     <div class="card-body">
@@ -48,25 +48,18 @@
 
                      
                 <div class="col-md-12 mb-4">
-                    <span class="block text-gray-700 mt-4">Assign To</span>
-                    <div class="form-check">
-                        
-                        @foreach ($users as $user)
-                            <input type="checkbox" class="form-check-input" name="user[]" value="{{ $user->id }}"
-                                id="user_{{ $user->id }}"  
-                                @if (count($brand->users->pluck('id')) > 0))
-                                    @foreach ($brand->users->pluck('id') as $checkuser)
-                                    {{ $checkuser == $user->id ? 'checked' : '' }}
-                                    @endforeach
-                                @endif    
-                                >
-                            <label class="form-check-label mr-5" for="user_{{ $user->id }}">
-                                <span class="ml-2">
-                                    {{ $user->name }}
-                                </span>
-                            </label>
-                        @endforeach
-                    </div>
+                    <label for="users" class="form-label">Assign To</label>                    
+                    <select class="form-control" name="user[]" id="users">
+                    @foreach ($users as $user)
+                            <option value="{{$user->id }}"
+                            @if (count($brand->users->pluck('id')) > 0))
+                                @foreach ($brand->users->pluck('id') as $selecteduser)
+                                {{ $selecteduser == $user->id ? 'selected' : '' }}
+                                @endforeach
+                            @endif    
+                            >{{ $user->name }}</option>
+                    @endforeach
+                    </select>
                 </div>
 
                 <input type="hidden" name="previous_logo" value="{{ $brand->logo}}" />

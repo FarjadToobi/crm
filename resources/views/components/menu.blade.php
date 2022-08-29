@@ -52,7 +52,7 @@
                   Alerts Center
               </h6>
               @forelse (auth()->user()->unreadnotifications as $notification)
-              <a href="{{ route("task.show", ['id' => $notification->data['id'], 'notify' => $notification->id]) }}" class="dropdown-item d-flex align-items-center">
+              <a href="{{ url("tasknotify/$notification->data['id']/$notification->id") }}" class="dropdown-item d-flex align-items-center">
                 <div class="mr-3">
                     <div class="icon-circle bg-primary">
                         <i class="fas fa-file-alt text-white"></i>
@@ -91,14 +91,14 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
               </a>
-              <a class="dropdown-item" href="#">
+              {{-- <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
               </a>
               <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
-              </a>
+              </a> --}}
               <div class="dropdown-divider"></div>
               <form action="{{ route('logout') }}" method="POST">
                 @csrf

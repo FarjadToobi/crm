@@ -13,6 +13,8 @@ use App\Models\Category;
 use App\Models\UserCategory;
 use App\Models\UserRole;
 
+use Illuminate\Support\Facades\Auth;
+
 class RolesAssignmentController
 {
     protected $rolesModel;
@@ -21,6 +23,7 @@ class RolesAssignmentController
 
     public function __construct()
     {
+        // if (!Auth::user()->hasPermission('setting-access')) abort(403);
         $this->rolesModel = Config::get('laratrust.models.role');
         $this->permissionModel = Config::get('laratrust.models.permission');
         $this->assignPermissions = Config::get('laratrust.panel.assign_permissions_to_user');

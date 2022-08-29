@@ -3,11 +3,11 @@
 
 @section('content')
 
-    <x-header title="Packages" description="lorem ipsum" />
+    {{-- <x-header title="Packages" description="lorem ipsum" /> --}}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Packages Table</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Packages List</h6>
             <a href="{{ route('package.create')}}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Create Package</a>
         </div>
         <div class="card-body">              
