@@ -19,7 +19,7 @@ class SubtaskController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('subtask-access')) abort(403);
-        if(Auth()->user()->hasRole('team-lead') || Auth()->user()->hasRole('employee')){
+        if(Auth()->user()->hasRole('team lead') || Auth()->user()->hasRole('employee')){
             $subtasks = Subtask::where('assign_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->get();
         }
         else{

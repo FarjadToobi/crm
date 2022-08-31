@@ -41,7 +41,7 @@
                     
                     <div class="col-md-6">
                         <x-select name="roles[]" label="Roles" :collection="$roles"  />
-                    </div>
+                    </div>s
 
                     {{-- @if ($permissions)
                 <div class="col-md-12 mb-3">

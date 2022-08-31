@@ -30,4 +30,7 @@ class Clients extends Model
         return $this->hasManyThrough(Invoices::class, Clients::class, 'id', 'client_id');
     }
     
+    public function invoice(){
+        return $this->belongsTo(Invoices::class, 'id', 'client_id');   
+    }
 }

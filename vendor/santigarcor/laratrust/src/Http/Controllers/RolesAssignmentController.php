@@ -108,7 +108,6 @@ class RolesAssignmentController
 
                 return $role;
             });
-            
         return View::make('laratrust::panel.roles-assignment.edit', [
             'modelKey' => $modelKey,
             'roles' => $roles,

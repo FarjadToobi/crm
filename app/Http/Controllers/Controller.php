@@ -15,9 +15,9 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     
-    public function notify($data){
+    public function notify($data, $id){
         if(auth()->user()){
-            $user = User::first();             
+            $user = User::find($id);            
             Notification::send($user, new UserNotification($data));         
         }
     }

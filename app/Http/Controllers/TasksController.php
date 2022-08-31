@@ -21,7 +21,7 @@ class TasksController extends Controller
     {
         //
         if (!Auth::user()->hasPermission('task-access')) abort(403);
-        if(Auth()->user()->hasRole('team-lead') || Auth()->user()->hasRole('employee')){
+        if(Auth()->user()->hasRole('team lead') || Auth()->user()->hasRole('employee')){
             $tasks = Tasks::whereIn('category_id', auth()->user()->category_list())->get();
         }
         else{
@@ -91,11 +91,21 @@ class TasksController extends Controller
             $projectCategory->project_id = $task->project_id;
             $projectCategory->category_id = $task->category_id;
 
-            
-            $this->notify([
-                'id' => $task->id,
-                'message' => "new task created"
-            ]);
+            $users = User::whereHas(
+                'category',
+                function ($q) use ($category) {
+                    $q->where('name', $category);
+                }
+            )->get();
+
+            if (count($users) > 0) {
+                foreach ($users as $u) {
+                    $this->notify([
+                        'id' => $request->task,
+                        'message' => "new task created"
+                    ], $u->id);
+                }
+            }
             
             if ($request->file('files')) {
                 $files = [];

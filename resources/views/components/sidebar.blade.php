@@ -121,6 +121,13 @@
                 </li>
             @endpermission
 
+            @permission('sales-target')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('targets.index') }}">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Sales Target</span></a>
+                </li>
+            @endpermission
 
             <!-- Nav Item - Tables -->
             @permission('lead-access')

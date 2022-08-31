@@ -8,6 +8,7 @@
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Invoice List</h6>
             {{-- <a href="{{ route('clients.create') }}" class="btn btn-info"><i class="fa fa-plus-circle"></i> Add New</a> --}}
+            <a class="btn btn-success" href="{{ url('invoice-export') }}">Excel</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

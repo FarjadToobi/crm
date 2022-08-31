@@ -14,7 +14,7 @@
             <form id="formAuthentication" class="mb-3" action="{{ route('task.store') }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
-                <div class="form-row">
+                <div class="form-row">  
                     @if (isset($id) != '')
                         <div class="col-md-6">
                             <input name="project_id" type="hidden" value="{{ $project->id }}" />
@@ -27,16 +27,18 @@
                             <x-input name="brand" label="Brand" type="text" placeholder="KFC"
                                 value="{{ $project->brand->name }}" readonly />
                         </div>
+
+                        <div class="col-md-6">
+                            <x-select name="category" label="Category" :collection="$project->project_category" />
+                        </div>
                     @else
                         <div class="col-md-6">
                             <x-select name="project_id" label="Projects" :collection="$project" />
                         </div>
+                        <div class="col-md-6">
+                            <x-select name="category_id" label="Category" :collection="$category" />
+                        </div>
                     @endif
-
-
-                    <div class="col-md-6">
-                        <x-select name="category" label="Category" :collection="$project->project_category" />
-                    </div>
 
 
                     <div class="col-md-6">

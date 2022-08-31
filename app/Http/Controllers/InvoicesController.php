@@ -10,6 +10,9 @@ use App\Models\Packages;
 use App\Models\Services;
 use App\Models\Projects;
 use App\Mail\MailTemplate;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LeadByClientImport;
+use App\Exports\InvoiceImport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -203,5 +206,15 @@ class InvoicesController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', json_encode($e->getMessage()));
         }
+    }
+
+    public function invoiceExport() 
+    {
+        return Excel::download(new InvoiceImport(), 'invoices.xlsx');
+    } 
+    
+    
+    public function invoicebyClient($id){
+        return Excel::download(new LeadByClientImport($id), 'clientinvoice.xlsx');
     }
 }

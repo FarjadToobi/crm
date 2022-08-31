@@ -52,9 +52,9 @@
                         <div class="mb-3">
                             <label for="roles" class="form-label">Roles</label>
                             <select class="form-control @error('roles') is-invalid @enderror" id="roles"
-                                name="roles[]" autofocus=""  multiple="multiple">
+                                name="roles[]" autofocus="">
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->getKey() }}" {!! $role->assigned ? 'selected' : '' !!}  >{{$role->name }}</option>
+                                    <option value="{{ $role->getKey() }}" {!! $role->assigned ? 'selected' : '' !!}  >{{$role->name }}</option>                                  
                                 @endforeach
                             </select>
                         </div>

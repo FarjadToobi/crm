@@ -6,19 +6,14 @@ use App\Models\Invoices;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class LeadByClientImport implements FromCollection, WithHeadings
+class InvoiceImport implements FromCollection, WithHeadings
 {
-    protected $id;
-    function __construct($id) {
-            $this->id = $id;
-    }
-
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        $invoices = Invoices::where('client_id', '=', $this->id)->get();
+        $invoices = Invoices::all();
         $invoice_data = array();
         foreach($invoices as $invoice){
             $data = [

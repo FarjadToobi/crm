@@ -41,8 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     Route::resource('logobreif', LogoBreifController::class);
     Route::resource('webbreif', WebBreifController::class);
-
     Route::resource('profile', HomeController::class);
+    Route::resource('targets', SalesTargetController::class);
 
 
     Route::any('create/{name}/{id}', [App\Http\Controllers\ProjectsController::class, 'asignproject']);
@@ -53,7 +53,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tasknotify/{id}/{notify}', [App\Http\Controllers\TasksController::class, 'tasknotify']);
     Route::get('subtaskbyid/{id}', [App\Http\Controllers\SubtaskController::class, 'subtaskbyid']);
 
-    Route::get('file-export/{id}', [App\Http\Controllers\ClientsController::class, 'fileExport'])->name('file-export');
+    
+    Route::get('file-export/{id}', [App\Http\Controllers\InvoicesController::class, 'invoicebyClient'])->name('invoicebyclient');
+    Route::get('invoice-export', [App\Http\Controllers\InvoicesController::class, 'invoiceExport'])->name('invoice-export');
 });
 
 

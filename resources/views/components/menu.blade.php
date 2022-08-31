@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">{{ $notification->data['text'] }}</div>
+                    {{-- <div class="small text-gray-500">{{ $notification->data['text'] }}</div> --}}
                     <span class="font-weight-bold">{{$notification->data['message']}}</span>
                 </div>
             </a>

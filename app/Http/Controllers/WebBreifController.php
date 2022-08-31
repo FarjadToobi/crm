@@ -22,6 +22,8 @@ class WebBreifController extends Controller
         //
         if (!Auth::user()->hasPermission('brief-access')) abort(403);
         $breifs = WebsiteForm::all();
+        
+        
         return view('admin.breif.webbreif.index', compact('breifs'));
     }
 

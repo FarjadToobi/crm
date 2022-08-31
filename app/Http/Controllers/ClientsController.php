@@ -10,10 +10,9 @@ use App\Models\Packages;
 use App\Models\Services;
 use App\Models\Currencies;
 use App\Models\Invoices;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\MailTemplate;
 use Facade\FlareClient\Http\Client;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\LeadByClientImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -62,13 +61,21 @@ class ClientsController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'contact' => 'required',
             'brand' => 'required',
             'status' => 'required',
         ]);
 
         try {
+            # check user if match with database user
+            $users = User::where('email', $request->email)->get();
+
+            # check if email is more than 1
+            if(sizeof($users) > 0){
+                return back()->with('error', $e->getMessage('This email already in user user !'));
+            }
+
             $client = new Clients;
             $client->name = $request->first_name;
             $client->last_name = $request->last_name;
@@ -130,12 +137,20 @@ class ClientsController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'contact' => 'required|max:16',
             'brand' => 'required',
             'status' => 'required',
         ]);
 
+        # check user if match with database user
+        $users = User::where('email', $request->email)->get();
+
+        # check if email is more than 1
+        if(sizeof($users) > 0){
+            return back()->with('error', $e->getMessage('This email already in user user !'));
+        }
+        
         try {
             $clients = Clients::find($id);
             $clients->name = $request->first_name;
@@ -216,10 +231,6 @@ class ClientsController extends Controller
 
         return view('admin.clients.lead', compact('packages', 'currencies', 'services', 'client'));
     }
-
-    public function fileExport($id) 
-    {
-        return Excel::download(new LeadByClientImport($id), 'users-invoices.xlsx');
-    }   
+ 
 
 }

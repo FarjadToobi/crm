@@ -48,20 +48,24 @@ class HomeController extends Controller
 
        
         
-        return view('home', compact(
-            'paidinvoice',
-            'unpaidinvoice',
-            'category',
-            'brand',
-            'currency',
-            'projects',
-            'leads',
-            'paidleads',
-            'unpaidleads',
-            'production',
-            'sales'
-        ));
+        if(Auth()->user()->hasRole('admin')){            
+            return view('home', compact(
+                'paidinvoice',
+                'unpaidinvoice',
+                'category',
+                'brand',
+                'currency',
+                'projects',
+                'leads',
+                'paidleads',
+                'unpaidleads',
+                'production',
+                'sales'
+            ));
 
+        } else{
+            return redirect('/messages');
+        }
     }
 
 

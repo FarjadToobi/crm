@@ -54,7 +54,10 @@
                                 <td>{{ $client->email }}</td>
                                 @permission('register-client')
                                 <td>
-                                    <button class="btn btn-primary"  data-toggle="modal" data-target="#passwordGenerate_{{$client->id}}" {{ $client->statuses->id != 1 ? 'disabled' : '' }}>Click Here</button>
+                                    {{-- {{  ? $client->invoice : "che" }} --}}
+                                    <button class="btn btn-primary"  data-toggle="modal" data-target="#passwordGenerate_{{$client->id}}" 
+                                        {{ ($client->statuses->id != 1) || empty($client->invoice) || $client->invoice->payment_status == '0' ? 'disabled' : '' }}
+                                        >Click Here</button>
                                 </td>
                                 @endpermission
                                 <td>
